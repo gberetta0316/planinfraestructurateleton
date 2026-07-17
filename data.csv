@@ -1,20 +1,20 @@
 ﻿Instituto;Detalle;Tipo;Presupuesto CLP;Real CLP;Inicio;Termino
-Arica;Colocar Techo fuera de bodega general;GASTO;1725500;10000001;2026-07-01;2026-07-30
+Arica;Colocar Techo fuera de bodega general;GASTO;1725500;500000;2026-07-21;2026-07-31
 Arica;Instalar cortina de aire en comedor;INVERSION;1368500;;;
-Arica;Mejorar paredes perimetrales de cancha con evidente deterioro;GASTO;2294320;;;
+Arica;Mejorar paredes perimetrales de cancha con evidente deterioro;GASTO;2294320;8888;2026-06-10;2026-07-02
 Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;;;
 Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;
 Iquique;Limpieza y pintura de fachada del Instituto en evidente deterioro.;GASTO;6000000;;;
 Iquique;Traslado de UTAC-Arte a primer piso (patio central).;GASTO;5950000;;;
 Iquique;Ampliación sala UTAC-Música.;GASTO;8330000;;;
-Calama;Cambio de pavimento en UEDA de alfombra a vinilico;GASTO;4760000;;;
+Calama;Cambio de pavimento en UEDA de alfombra a vinilico;GASTO;4760000;5000000;2026-07-01;2026-07-05
 Calama;Sombreado fijo para estacionamiento. (actividades con pacientes y campaña);INVERSION;29990000;;;
 Calama;Ampliación sala de UTA para sala multiuso. Proyecto GI;INVERSION;41650000;;;
 Calama;Reemplazo de ceramicas camarin mujeres. La gran mayoria esta quebrada;GASTO;5000000;;;
 Antofagasta;Cambio de equipo de AC de cafeteria ( 2 unidades caset piso cielo);INVERSION;4600000;;;
 Antofagasta;Normalizar sistema de bombeo de circulación de  piscina ( faltante 2 Bombas );INVERSION;1785000;;;
-Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;850000;2026-05-06;2026-07-09
-Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;2026-07-22;2026-09-10
+Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;;;
+Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;;
 Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;;;
 Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;
 Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento;GASTO;6000000;;;
@@ -28,7 +28,7 @@ Santiago;Instalacion de espejos sala UTAC ciclodanza;GASTO;4000000;;;
 Santiago;Galpón LOP renovar lavafondo acero inoxidable por corrosión - sala de yeso;GASTO;2000000;;;
 Santiago;Galpón Lop Mejoramiento extracción sala de Laminado y Tabartería;GASTO;4000000;;;
 Santiago;Modificacion de oficinas y puestos de trabajo en Galpon LOP - PARTE 1 (piso superior);INVERSION;78000000;;;
-Valparaiso;Extractores en baños de personal (extractor centrifugo de simple aspiración);GASTO;3400000;;2026-07-01;2026-07-30
+Valparaiso;Extractores en baños de personal (extractor centrifugo de simple aspiración);GASTO;3400000;;;
 Valparaiso;Mudador para pacientes;GASTO;4300000;;;
 Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;;;
 Valparaiso;Reparación y sellado de paredes interior IT (humedad);GASTO;1500000;;;
