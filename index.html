@@ -1358,6 +1358,8 @@ function renderKPIs(){
   const totalMonto = activeTasks.reduce((a,t)=>a+t.monto,0);
   const montoGasto = activeTasks.filter(t=>t.tipo==="GASTO").reduce((a,t)=>a+t.monto,0);
   const montoInv = activeTasks.filter(t=>t.tipo==="INVERSION").reduce((a,t)=>a+t.monto,0);
+  const totalPlanMonto = TASKS.reduce((a,t)=>a+t.monto,0);
+  const pctPlanActivo = totalPlanMonto>0 ? Math.round((totalMonto/totalPlanMonto)*100) : 0;
 
   const agg = aggregateOverall(activeTasks);
   const avancePais = agg.pct;
@@ -1388,8 +1390,9 @@ function renderKPIs(){
     </div>
     <div class="kpi">
       <div class="label">Presupuesto total</div>
-      <div class="value" style="font-size:20px">${clp(totalMonto)}</div>
-      <div class="sub">Gasto ${clp(montoGasto)} · Inversión ${clp(montoInv)}</div>
+      <div class="value" style="font-size:16px">${clp(totalMonto)} <small>/ ${clp(totalPlanMonto)}</small></div>
+      <div class="kpi-bar"><div style="width:${pctPlanActivo}%"></div></div>
+      <div class="sub">${pctPlanActivo}% del plan activado · Gasto ${clp(montoGasto)} · Inversión ${clp(montoInv)}</div>
     </div>
     <div class="kpi">
       <div class="label">Tareas programadas</div>
