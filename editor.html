@@ -1563,7 +1563,7 @@ function renderInstitutes(){
     if(visibleTasks.length===0) return;
     anyVisible = true;
 
-    const montoTotal = activeTasks.reduce((a,t)=>a+t.monto,0);
+    const montoTotal = allTasks.reduce((a,t)=>a+t.monto,0);
     const instAgg = aggregateOverall(activeTasks);
     const instPct = instAgg.pct;
 
