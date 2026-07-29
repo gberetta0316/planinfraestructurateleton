@@ -1,13 +1,13 @@
 ﻿Instituto;Detalle;Tipo;Presupuesto CLP;Real CLP;Inicio;Termino
-Arica;Colocar Techo fuera de bodega general;GASTO;1725500;500000;2026-07-21;2026-07-31
-Arica;Instalar cortina de aire en comedor;INVERSION;1368500;0;;
-Arica;Mejorar paredes perimetrales de cancha con evidente deterioro;GASTO;2294320;8888;2026-06-10;2026-07-02
-Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;5;2026-07-07;2026-07-08
-Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;1000000;2026-07-28;2026-08-06
+Arica;Colocar Techo fuera de bodega general;GASTO;1725500;;;
+Arica;Instalar cortina de aire en comedor;INVERSION;1368500;;;
+Arica;Mejorar paredes perimetrales de cancha con evidente deterioro;GASTO;2294320;;;
+Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;;;
+Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;
 Iquique;Limpieza y pintura de fachada del Instituto en evidente deterioro.;GASTO;6000000;;;
 Iquique;Traslado de UTAC-Arte a primer piso (patio central).;GASTO;5950000;;;
 Iquique;Ampliación sala UTAC-Música.;GASTO;8330000;;;
-Calama;Cambio de pavimento en UEDA de alfombra a vinilico;GASTO;4760000;5000000;2026-07-01;2026-07-05
+Calama;Cambio de mueble recepcion 221;GASTO;4500000;;;
 Calama;Sombreado fijo para estacionamiento. (actividades con pacientes y campaña);INVERSION;29990000;;;
 Calama;Ampliación sala de UTA para sala multiuso. Proyecto GI;INVERSION;41650000;;;
 Calama;Reemplazo de ceramicas camarin mujeres. La gran mayoria esta quebrada;GASTO;5000000;;;
@@ -44,7 +44,7 @@ Talca;Remodelación del área para la sala de descanso de TO.;GASTO;4000000;;;
 Talca;Mejoramiento y sellado de la pirámide vidriada y el pasillo central (enfermería);GASTO;2000000;;;
 Concepcion;Instalación de termos de agua caliente para optimizar el uso de las calderas;INVERSION;3000000;;;
 Concepcion;Mejorar infraestructura para prevenir el ingreso de palomas al interior del instituto;GASTO;7000000;;;
-Concepcion;Trabajos de reparacion restantes para eliminar zonas de goteras historicas;GASTO;5000000;;;
+Concepcion;Trabajos de reparacion restantes para eliminar zonas de goteras historicas;GASTO;5000000;;2026-07-06;2026-07-31
 Concepcion;"Remodelar de box de traumatólogo, se necesita mas espacio para la atención de pacientes.";GASTO;4000000;;;
 Concepcion;Instalar cielo falso en sala de esterilización para alcanzar temp. exigida por normativa.;GASTO;2000000;;;
 Valdivia;Instalacion de AC en casino y Administración (24K= 2 uni.);INVERSION;3000000;;;
