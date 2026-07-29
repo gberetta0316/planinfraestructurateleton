@@ -574,6 +574,7 @@ input[type="number"]::-webkit-inner-spin-button{opacity:0.5;}
 }
 .badge.gasto{color:var(--accent-2);border-color:var(--accent-2);}
 .badge.inversion{color:var(--accent);border-color:var(--accent);}
+.badge.cotizacion{color:#F2C94C;border-color:#F2C94C;}
 .monto{
   font-family:var(--font-mono);
   font-size:12px;
@@ -1522,6 +1523,7 @@ function renderTaskRow(t, axis){
     <div class="detalle">${t.detalle}</div>
     <div class="meta-row">
       <span class="badge ${t.tipo==='GASTO'?'gasto':'inversion'}">${t.tipo}</span>
+      ${t.cotizacion ? '<span class="badge cotizacion">En cotización</span>' : ""}
       <span class="monto">Presupuesto ${clp(t.monto)}</span>
       ${hasReal ? `<span class="monto">· Real ${clp(Number(t.real))}</span>` : ""}
       ${varianceHtml}
@@ -1708,7 +1710,8 @@ function parseTasksCSV(text){
     real: header.findIndex(h=>h.includes("real")),
     inicio: header.findIndex(h=>h.includes("inicio")),
     fin: header.findIndex(h=>h.includes("term")||h.includes("fin")),
-    activo: header.findIndex(h=>h.includes("activo"))
+    activo: header.findIndex(h=>h.includes("activo")),
+    cotizacion: header.findIndex(h=>h.includes("cotizacion")||h.includes("cotización"))
   };
   if(idx.instituto<0 || idx.detalle<0 || idx.monto<0) return null;
 
@@ -1732,7 +1735,9 @@ function parseTasksCSV(text){
     const fin = idx.fin>=0 ? (cols[idx.fin]||"").trim() : "";
     const activoRaw = idx.activo>=0 ? (cols[idx.activo]||"").trim().toLowerCase() : "si";
     const activo = !(activoRaw==="no" || activoRaw==="0" || activoRaw==="false");
-    parsed.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo });
+    const cotizacionRaw = idx.cotizacion>=0 ? (cols[idx.cotizacion]||"").trim().toLowerCase() : "no";
+    const cotizacion = (cotizacionRaw==="si" || cotizacionRaw==="1" || cotizacionRaw==="true");
+    parsed.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo, cotizacion });
   }
   return parsed.length>0 ? parsed : null;
 }

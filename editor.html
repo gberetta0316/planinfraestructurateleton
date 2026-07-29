@@ -563,6 +563,7 @@ input[type="number"]::-webkit-inner-spin-button{opacity:0.5;}
 }
 .badge.gasto{color:var(--accent-2);border-color:var(--accent-2);}
 .badge.inversion{color:var(--accent);border-color:var(--accent);}
+.badge.cotizacion{color:#F2C94C;border-color:#F2C94C;}
 .monto{
   font-family:var(--font-mono);
   font-size:12px;
@@ -868,7 +869,7 @@ footer.note{
 .editor-table .ed-delete:hover{border-color:var(--danger);color:var(--danger);}
 .editor-table .ed-detalle-cell{display:flex;align-items:center;gap:8px;}
 .editor-table .ed-detalle-cell input[type="text"]{width:auto;flex:1;min-width:0;}
-.editor-table .ed-detalle-cell input[type="checkbox"]{flex:none;width:16px;height:16px;accent-color:var(--accent-2);cursor:pointer;}
+.editor-table input[type="checkbox"]{flex:none;width:16px;height:16px;accent-color:var(--accent-2);cursor:pointer;}
 .editor-table tr.inactive-row .ed-detalle{color:var(--ink-faint);}
 .editor-empty-row td{
   text-align:center;
@@ -1033,6 +1034,7 @@ footer.note{
           <tr>
             <th style="width:150px;">Instituto</th>
             <th>Detalle de la tarea</th>
+            <th style="width:90px;text-align:center;">Cotización</th>
             <th style="width:110px;">Tipo</th>
             <th style="width:130px;">Presupuesto (CLP)</th>
             <th style="width:130px;">Real (CLP)</th>
@@ -1633,6 +1635,7 @@ function renderTaskRow(t, axis){
     <div class="detalle">${t.detalle}</div>
     <div class="meta-row">
       <span class="badge ${t.tipo==='GASTO'?'gasto':'inversion'}">${t.tipo}</span>
+      ${t.cotizacion ? '<span class="badge cotizacion">En cotización</span>' : ""}
       <span class="monto">Presupuesto ${clp(t.monto)}</span>
       ${hasReal ? `<span class="monto">· Real ${clp(Number(t.real))}</span>` : ""}
       ${varianceHtml}
@@ -1750,14 +1753,14 @@ document.getElementById("resetBtn").addEventListener("click", async ()=>{
 document.getElementById("exportBtn").addEventListener("click", exportCSV);
 
 function exportCSV(){
-  const rows = [["Instituto","Tarea","Tipo","Presupuesto CLP","Gasto/Inv. real CLP","Diferencia CLP","Diferencia %","Fecha inicio","Fecha término","Estado","Avance % (por días)","Activo"]];
+  const rows = [["Instituto","Tarea","Tipo","Presupuesto CLP","Gasto/Inv. real CLP","Diferencia CLP","Diferencia %","Fecha inicio","Fecha término","Estado","Avance % (por días)","Activo","Cotizacion"]];
   TASKS.forEach(t=>{
     const p = calcProgress(t);
     const hasReal = t.real!=="" && t.real!==null && !isNaN(Number(t.real));
     const realVal = hasReal ? Number(t.real) : "";
     const diff = hasReal ? (Number(t.real)-t.monto) : "";
     const diffPct = hasReal && t.monto>0 ? Math.round((diff/t.monto)*100) : "";
-    rows.push([t.instituto, t.detalle, t.tipo, t.monto, realVal, diff, diffPct, t.inicio, t.fin, STATE_LABEL[stateOf(t)], p===null?"":p, isActive(t)?"SI":"NO"]);
+    rows.push([t.instituto, t.detalle, t.tipo, t.monto, realVal, diff, diffPct, t.inicio, t.fin, STATE_LABEL[stateOf(t)], p===null?"":p, isActive(t)?"SI":"NO", t.cotizacion?"SI":"NO"]);
   });
   const csv = rows.map(r=>r.map(cell=>{
     const s = String(cell ?? "");
@@ -1840,7 +1843,7 @@ function renderEditorTable(){
   editorTableBody.innerHTML = "";
 
   if(TASKS.length===0){
-    editorTableBody.innerHTML = `<tr class="editor-empty-row"><td colspan="8">No hay tareas. Usa "+ Agregar tarea" para crear la primera.</td></tr>`;
+    editorTableBody.innerHTML = `<tr class="editor-empty-row"><td colspan="9">No hay tareas. Usa "+ Agregar tarea" para crear la primera.</td></tr>`;
   }
 
   TASKS.forEach(t=>{
@@ -1855,6 +1858,7 @@ function renderEditorTable(){
     tr.innerHTML = `
       <td><select class="ed-instituto">${instOptions}</select></td>
       <td class="ed-detalle-cell"><input type="checkbox" class="ed-activo" title="Tarea activa (cuenta en las estadísticas)" ${isActive(t)?"checked":""}><input type="text" class="ed-detalle" value="${(t.detalle||"").replace(/"/g,'&quot;')}"></td>
+      <td style="text-align:center;"><input type="checkbox" class="ed-cotizacion" title="Tarea en proceso de cotización" ${t.cotizacion?"checked":""}></td>
       <td>
         <select class="ed-tipo">
           <option value="GASTO" ${t.tipo==="GASTO"?"selected":""}>GASTO</option>
@@ -1869,6 +1873,7 @@ function renderEditorTable(){
     `;
 
     tr.querySelector(".ed-activo").addEventListener("change", (e)=>{ t.activo = e.target.checked; saveTasks(); renderEditorTable(); });
+    tr.querySelector(".ed-cotizacion").addEventListener("change", (e)=>{ t.cotizacion = e.target.checked; saveTasks(); });
     tr.querySelector(".ed-instituto").addEventListener("change", (e)=>{ t.instituto = e.target.value; saveTasks(); });
     tr.querySelector(".ed-detalle").addEventListener("change", (e)=>{ t.detalle = e.target.value; saveTasks(); });
     tr.querySelector(".ed-tipo").addEventListener("change", (e)=>{ t.tipo = e.target.value; saveTasks(); });
@@ -1924,9 +1929,9 @@ document.getElementById("restoreOriginalBtn").addEventListener("click", async ()
 });
 
 function buildTasksCSV(){
-  const rows = [["Instituto","Detalle","Tipo","Presupuesto CLP","Real CLP","Inicio","Termino","Activo"]];
+  const rows = [["Instituto","Detalle","Tipo","Presupuesto CLP","Real CLP","Inicio","Termino","Activo","Cotizacion"]];
   TASKS.forEach(t=>{
-    rows.push([t.instituto, t.detalle, t.tipo, t.monto, t.real||"", t.inicio||"", t.fin||"", isActive(t)?"SI":"NO"]);
+    rows.push([t.instituto, t.detalle, t.tipo, t.monto, t.real||"", t.inicio||"", t.fin||"", isActive(t)?"SI":"NO", t.cotizacion?"SI":"NO"]);
   });
   return rows.map(r=>r.map(cell=>{
     const s = String(cell ?? "");
@@ -2149,7 +2154,8 @@ document.getElementById("importTasksInput").addEventListener("change", (e)=>{
         real: header.findIndex(h=>h.includes("real")),
         inicio: header.findIndex(h=>h.includes("inicio")),
         fin: header.findIndex(h=>h.includes("term")||h.includes("fin")),
-        activo: header.findIndex(h=>h.includes("activo"))
+        activo: header.findIndex(h=>h.includes("activo")),
+        cotizacion: header.findIndex(h=>h.includes("cotizacion")||h.includes("cotización"))
       };
       if(idx.instituto<0 || idx.detalle<0 || idx.monto<0){
         await customAlert("El CSV debe tener al menos las columnas Instituto, Detalle y Presupuesto. Revisa el encabezado.");
@@ -2177,7 +2183,9 @@ document.getElementById("importTasksInput").addEventListener("change", (e)=>{
         const fin = idx.fin>=0 ? (cols[idx.fin]||"").trim() : "";
         const activoRaw = idx.activo>=0 ? (cols[idx.activo]||"").trim().toLowerCase() : "si";
         const activo = !(activoRaw==="no" || activoRaw==="0" || activoRaw==="false");
-        imported.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo });
+        const cotizacionRaw = idx.cotizacion>=0 ? (cols[idx.cotizacion]||"").trim().toLowerCase() : "no";
+        const cotizacion = (cotizacionRaw==="si" || cotizacionRaw==="1" || cotizacionRaw==="true");
+        imported.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo, cotizacion });
       }
 
       if(imported.length===0){
