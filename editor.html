@@ -1948,7 +1948,12 @@ function loadGithubConfig(){
   try{ return JSON.parse(localStorage.getItem(GITHUB_CONFIG_KEY)) || null; }catch(e){ return null; }
 }
 function saveGithubConfig(cfg){
-  localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(cfg));
+  try{
+    localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(cfg));
+    return JSON.parse(localStorage.getItem(GITHUB_CONFIG_KEY)||"null") !== null;
+  }catch(e){
+    return false;
+  }
 }
 
 function utf8ToBase64(str){
@@ -2019,7 +2024,10 @@ document.getElementById("githubConfigBtn").addEventListener("click", async ()=>{
     await customAlert("Faltan datos: usuario, repositorio y token son obligatorios.");
     return;
   }
-  saveGithubConfig(newCfg);
+  if(!saveGithubConfig(newCfg)){
+    await customAlert("No se pudo guardar la conexión en este navegador. Puede que estés en una ventana privada/incógnito, o que el navegador tenga bloqueado el almacenamiento de datos de sitios para esta página. Activá el almacenamiento de datos del sitio (o salí del modo privado) y volvé a intentar.");
+    return;
+  }
   setPublishStatus("Conexión guardada. Ya puedes publicar.", "ok");
 });
 
@@ -2038,7 +2046,10 @@ document.getElementById("publishNowBtn").addEventListener("click", async ()=>{
       await customAlert("Faltan datos: usuario, repositorio y token son obligatorios.");
       return;
     }
-    saveGithubConfig(newCfg);
+    if(!saveGithubConfig(newCfg)){
+      await customAlert("No se pudo guardar la conexión en este navegador. Puede que estés en una ventana privada/incógnito, o que el navegador tenga bloqueado el almacenamiento de datos de sitios para esta página. Activá el almacenamiento de datos del sitio (o salí del modo privado) y volvé a intentar.");
+      return;
+    }
     cfg = newCfg;
   }
 
