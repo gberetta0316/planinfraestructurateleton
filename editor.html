@@ -498,6 +498,7 @@ input[type="number"]::-webkit-inner-spin-button{opacity:0.5;}
   color:var(--ink-faint);
   min-width:150px;
 }
+.inst-real-over{color:var(--danger);font-weight:700;}
 .inst-bar-track{
   flex:1;
   height:8px;
@@ -1567,8 +1568,10 @@ function renderInstitutes(){
     const instPct = instAgg.pct;
 
     const realTasks = activeTasks.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
-    const montoRealInst = realTasks.reduce((a,t)=>a+Number(t.real),0);
-    const realMetaStr = realTasks.length>0 ? ` · Real ${clp(montoRealInst)}` : "";
+    const cotizTasks = activeTasks.filter(t=>t.cotizacion && !(t.real!=="" && t.real!==null && !isNaN(Number(t.real))));
+    const montoRealInst = realTasks.reduce((a,t)=>a+Number(t.real),0) + cotizTasks.reduce((a,t)=>a+t.monto,0);
+    const overBudgetInst = montoRealInst > montoTotal;
+    const realMetaStr = (realTasks.length>0 || cotizTasks.length>0) ? ` · <span class="${overBudgetInst?'inst-real-over':''}">Real ${clp(montoRealInst)}</span>` : "";
 
     const isOpen = selectedInstitute ? true : !!openStore[inst];
 
