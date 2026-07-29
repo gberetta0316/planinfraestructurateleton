@@ -2,74 +2,75 @@
 Arica;Colocar Techo fuera de bodega general;GASTO;1725500;;;;NO
 Arica;Instalar cortina de aire en comedor;INVERSION;1368500;;;;NO
 Arica;Mejorar paredes perimetrales de cancha con evidente deterioro;GASTO;2294320;;;;NO
-Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;;;;SI
-Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;;SI
-Iquique;Limpieza y pintura de fachada del Instituto en evidente deterioro.;GASTO;6000000;;;;SI
-Iquique;Traslado de UTAC-Arte a primer piso (patio central).;GASTO;5950000;;;;SI
-Iquique;Ampliación sala UTAC-Música.;GASTO;8330000;;;;SI
-Calama;Cambio de mueble recepcion 221 00;GASTO;4500000;;;;SI
-Calama;Sombreado fijo para estacionamiento. (actividades con pacientes y campaña);INVERSION;29990000;;;;SI
-Calama;Ampliación sala de UTA para sala multiuso. Proyecto GI;INVERSION;41650000;;;;SI
-Calama;Reemplazo de ceramicas camarin mujeres. La gran mayoria esta quebrada;GASTO;5000000;;;;SI
-Antofagasta;Cambio de equipo de AC de cafeteria ( 2 unidades caset piso cielo);INVERSION;4600000;;;;SI
-Antofagasta;Normalizar sistema de bombeo de circulación de  piscina ( faltante 2 Bombas );INVERSION;1785000;;;;SI
-Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;;;;SI
-Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;;;SI
-Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;;;;SI
-Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;SI
-Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento;GASTO;6000000;;;;SI
-Coquimbo;Cierre Terraza en 2° piso para habilitar para reuniones con equipo y padres.;GASTO;3000000;;;;SI
-Santiago;"Separación de modulos movilización para creación de 2 box medicos, (Coordindor de LOP)";GASTO;7000000;;;;SI
-Santiago;Remodelación recepción Guardias Titan (muebles nuevos y pintura);GASTO;1000000;;;;SI
-Santiago;"Renovar empavonado Sector Box Lop, dañado y sucio";GASTO;890000;;;;SI
-Santiago;Renovar iluminación salas y oficinas de  kinesiología;GASTO;3900000;;;;SI
-Santiago;Aumento capacidad electrica Grupo electrogeno edificio A;INVERSION;30000000;;;;SI
-Santiago;Instalacion de espejos sala UTAC ciclodanza;GASTO;4000000;;;;SI
-Santiago;Galpón LOP renovar lavafondo acero inoxidable por corrosión - sala de yeso;GASTO;2000000;;;;SI
-Santiago;Galpón Lop Mejoramiento extracción sala de Laminado y Tabartería;GASTO;4000000;;;;SI
-Santiago;Modificacion de oficinas y puestos de trabajo en Galpon LOP - PARTE 1 (piso superior);INVERSION;78000000;;;;SI
-Valparaiso;Extractores en baños de personal (extractor centrifugo de simple aspiración);GASTO;3400000;;;;SI
-Valparaiso;Mudador para pacientes;GASTO;4300000;;;;SI
-Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;;;;SI
-Valparaiso;Reparación y sellado de paredes interior IT (humedad);GASTO;1500000;;;;SI
-Valparaiso;Pintura exterior escalera;GASTO;2150000;;;;SI
-Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;;;;SI
-Valparaiso;Cierre hacia enfermería (que impida el libre tránsito de pacientes);GASTO;1500000;;;;SI
-Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha;GASTO;17000000;;;;SI
-Talca;Modificación de pendiente de la cubierta del estacionamiento de vehículos institucionales.;GASTO;5000000;;;;SI
-Talca;Construcción de acceso con rampa al estacionamiento interior del edificio (nueva mampara).;GASTO;9000000;;;;SI
-Talca;Nuevo toldo estructural en entrada principal (para dejar y retirar pacientes).;INVERSION;20000000;;;;SI
-Talca;Construcción de biblioteca en archivo de fichas clínicas.;INVERSION;15000000;;;;SI
-Talca;Remodelación del área para la sala de descanso de TO.;GASTO;4000000;;;;SI
-Talca;Mejoramiento y sellado de la pirámide vidriada y el pasillo central (enfermería);GASTO;2000000;;;;SI
-Concepcion;Instalación de termos de agua caliente para optimizar el uso de las calderas;INVERSION;3000000;;;;SI
-Concepcion;Mejorar infraestructura para prevenir el ingreso de palomas al interior del instituto;GASTO;7000000;;;;SI
-Concepcion;Trabajos de reparacion restantes para eliminar zonas de goteras historicas;GASTO;5000000;;2026-07-06;2026-07-31;SI
-Concepcion;"Remodelar de box de traumatólogo, se necesita mas espacio para la atención de pacientes.";GASTO;4000000;;;;SI
-Concepcion;Instalar cielo falso en sala de esterilización para alcanzar temp. exigida por normativa.;GASTO;2000000;;;;SI
-Valdivia;Instalacion de AC en casino y Administración (24K= 2 uni.);INVERSION;3000000;;;;SI
-Valdivia;Instalacion de AC en Dirección y voluntariado (9K= 2 uni.);INVERSION;1500000;;;;SI
-Valdivia;Implementacion de campana con extracción en nueva sala LOP;INVERSION;2500000;;;;SI
-Valdivia;Bomba de condensación ambas calderas;INVERSION;900000;;;;SI
-Valdivia;Pintura boxes médicos;GASTO;1249500;;;;SI
-Valdivia;Vestidor personal en piscina;GASTO;5950000;;;;SI
-Valdivia;Cielo americano oficina JGSV y sala de familia;GASTO;2000000;;;;SI
-Valdivia;Compra e instalacion Ac para sala nuevas tecnologías de 18000 BTU;INVERSION;1200000;;;;SI
-Temuco;Modificación de circuito de agua potable para sectorizar y evitar corte total;GASTO;5000000;;;;SI
-Temuco;"Mejora de mobiliario antiguo y en mal estado, distintos sectores";GASTO;10000000;;;;SI
-Temuco;"Reparación de techumbre de Intituto, deteriorado y con filtraciones en varios puntos (LOP, pasillo, etc)";GASTO;40000000;;;;SI
-Temuco;Cambio de sistema de calefaccion para duchas (sistema de agua caliente).;INVERSION;8000000;;;;SI
-Puerto Montt;Sala de bienestar para colaboradores;GASTO;10000000;;;;SI
-Puerto Montt;Ampliacion sala para padres;INVERSION;10000000;;;;SI
-Puerto Montt;Instalar techo  en pasillo de acceso a unidad de movilizacion;GASTO;15000000;;;;SI
-Puerto Montt;Mejoramiento interior Sala REAS;GASTO;3000000;;;;SI
-Puerto Montt;Instalacion de AP para lavamanos en Sala de Arte;GASTO;1785000;;;;SI
-Coyhaique;Mejoramiento de puerta de bodega pellet;GASTO;1000000;;;;SI
-Coyhaique;Cambio de iluminación fluorescente a Led;GASTO;600000;;;;SI
-Iquique;Cambio de Grupo Electrógeno;INVERSION;15000000;;;;SI
-Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;;;;SI
-Calama;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;SI
-Copiapo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;SI
-Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;;;;SI
-Coquimbo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;SI
-Santiago;Unificación de sistema de respaldo de agua del edificio B con edificio A;INVERSION;8000000;;;;SI
+Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;;;;NO
+Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;;NO
+Iquique;Limpieza y pintura de fachada del Instituto en evidente deterioro.;GASTO;6000000;;;;NO
+Iquique;Traslado de UTAC-Arte a primer piso (patio central).;GASTO;5950000;;;;NO
+Iquique;Ampliación sala UTAC-Música.;GASTO;8330000;;;;NO
+Calama;Cambio de pavimento en UEDA de alfombra a vinilico;GASTO;4760000;;;;NO
+Calama;Sombreado fijo para estacionamiento. (actividades con pacientes y campaña);INVERSION;29990000;;;;NO
+Calama;Ampliación sala de UTA para sala multiuso. Proyecto GI;INVERSION;41650000;;;;NO
+Calama;Reemplazo de ceramicas camarin mujeres. La gran mayoria esta quebrada;GASTO;5000000;;;;NO
+Antofagasta;Cambio de equipo de AC de cafeteria ( 2 unidades caset piso cielo);INVERSION;4600000;;;;NO
+Antofagasta;Normalizar sistema de bombeo de circulación de  piscina ( faltante 2 Bombas );INVERSION;1785000;;;;NO
+Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;;;;NO
+Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;;;NO
+Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;;;;NO
+Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;NO
+Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento;GASTO;6000000;;;;NO
+Coquimbo;Cierre Terraza en 2° piso para habilitar para reuniones con equipo y padres.;GASTO;3000000;;;;NO
+Santiago;"Separación de modulos movilización para creación de 2 box medicos, (Coordindor de LOP)";GASTO;7000000;;;;NO
+Santiago;Remodelación recepción Guardias Titan (muebles nuevos y pintura);GASTO;1000000;;;;NO
+Santiago;"Renovar empavonado Sector Box Lop, dañado y sucio";GASTO;890000;;;;NO
+Santiago;Renovar iluminación salas y oficinas de  kinesiología;GASTO;3900000;;;;NO
+Santiago;Aumento capacidad electrica Grupo electrogeno edificio A;INVERSION;30000000;;;;NO
+Santiago;Instalacion de espejos sala UTAC ciclodanza;GASTO;4000000;;;;NO
+Santiago;Galpón LOP renovar lavafondo acero inoxidable por corrosión - sala de yeso;GASTO;2000000;;;;NO
+Santiago;Galpón Lop Mejoramiento extracción sala de Laminado y Tabartería;GASTO;4000000;;;;NO
+Santiago;Modificacion de oficinas y puestos de trabajo en Galpon LOP - PARTE 1 (piso superior);INVERSION;78000000;;;;NO
+Valparaiso;Extractores en baños de personal (extractor centrifugo de simple aspiración);GASTO;3400000;;;;NO
+Valparaiso;Mudador para pacientes;GASTO;4300000;;;;NO
+Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;;;;NO
+Valparaiso;Reparación y sellado de paredes interior IT (humedad);GASTO;1500000;;;;NO
+Valparaiso;Pintura exterior escalera;GASTO;2150000;;;;NO
+Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;;;;NO
+Valparaiso;Cierre hacia enfermería (que impida el libre tránsito de pacientes);GASTO;1500000;;;;NO
+Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha;GASTO;17000000;;;;NO
+Talca;Modificación de pendiente de la cubierta del estacionamiento de vehículos institucionales.;GASTO;5000000;;;;NO
+Talca;Construcción de acceso con rampa al estacionamiento interior del edificio (nueva mampara).;GASTO;9000000;;;;NO
+Talca;Nuevo toldo estructural en entrada principal (para dejar y retirar pacientes).;INVERSION;20000000;;;;NO
+Talca;Construcción de biblioteca en archivo de fichas clínicas.;INVERSION;15000000;;;;NO
+Talca;Remodelación del área para la sala de descanso de TO.;GASTO;4000000;;;;NO
+Talca;Mejoramiento y sellado de la pirámide vidriada y el pasillo central (enfermería);GASTO;2000000;;;;NO
+Concepcion;Instalación de termos de agua caliente para optimizar el uso de las calderas;INVERSION;3000000;;;;NO
+Concepcion;Mejorar infraestructura para prevenir el ingreso de palomas al interior del instituto;GASTO;7000000;;;;NO
+Concepcion;Trabajos de reparacion restantes para eliminar zonas de goteras historicas;GASTO;5000000;;;;NO
+Concepcion;"Remodelar de box de traumatólogo, se necesita mas espacio para la atención de pacientes.";GASTO;4000000;;;;NO
+Concepcion;Instalar cielo falso en sala de esterilización para alcanzar temp. exigida por normativa.;GASTO;2000000;;;;NO
+Valdivia;Instalacion de AC en casino y Administración (24K= 2 uni.);INVERSION;3000000;;;;NO
+Valdivia;Instalacion de AC en Dirección y voluntariado (9K= 2 uni.);INVERSION;1500000;;;;NO
+Valdivia;Implementacion de campana con extracción en nueva sala LOP;INVERSION;2500000;;;;NO
+Valdivia;Bomba de condensación ambas calderas;INVERSION;900000;;;;NO
+Valdivia;Pintura boxes médicos;GASTO;1249500;;;;NO
+Valdivia;Vestidor personal en piscina;GASTO;5950000;;;;NO
+Valdivia;Cielo americano oficina JGSV y sala de familia;GASTO;2000000;;;;NO
+Valdivia;Compra e instalacion Ac para sala nuevas tecnologías de 18000 BTU;INVERSION;1200000;;;;NO
+Temuco;Modificación de circuito de agua potable para sectorizar y evitar corte total;GASTO;5000000;;;;NO
+Temuco;"Mejora de mobiliario antiguo y en mal estado, distintos sectores";GASTO;10000000;;;;NO
+Temuco;"Reparación de techumbre de Intituto, deteriorado y con filtraciones en varios puntos (LOP, pasillo, etc)";GASTO;40000000;;;;NO
+Temuco;Cambio de sistema de calefaccion para duchas (sistema de agua caliente).;INVERSION;8000000;;;;NO
+Puerto Montt;Sala de bienestar para colaboradores;GASTO;10000000;;;;NO
+Puerto Montt;Ampliacion sala para padres;INVERSION;10000000;;;;NO
+Puerto Montt;Instalar techo  en pasillo de acceso a unidad de movilizacion;GASTO;15000000;;;;NO
+Puerto Montt;Mejoramiento interior Sala REAS;GASTO;3000000;;;;NO
+Puerto Montt;Instalacion de AP para lavamanos en Sala de Arte;GASTO;1785000;;;;NO
+Coyhaique;Mejoramiento de puerta de bodega pellet;GASTO;1000000;;;;NO
+Coyhaique;Cambio de iluminación fluorescente a Led;GASTO;600000;;;;NO
+Iquique;Cambio de Grupo Electrógeno;INVERSION;15000000;;;;NO
+Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;;;;NO
+Calama;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO
+Copiapo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO
+Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;;;;NO
+Coquimbo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO
+Santiago;Unificación de sistema de respaldo de agua del edificio B con edificio A;INVERSION;8000000;;;;NO
+Arica;Construir bodega en cancha;GASTO;8000000;;;;NO
