@@ -549,6 +549,8 @@ input[type="number"]::-webkit-inner-spin-button{opacity:0.5;}
   gap:10px;
   flex-wrap:wrap;
 }
+.task-row.inactive .detalle{color:var(--ink-faint);}
+.task-row.inactive .meta-row{opacity:.6;}
 .badge{
   font-family:var(--font-mono);
   font-size:10px;
@@ -864,6 +866,10 @@ footer.note{
   line-height:1;
 }
 .editor-table .ed-delete:hover{border-color:var(--danger);color:var(--danger);}
+.editor-table .ed-detalle-cell{display:flex;align-items:center;gap:8px;}
+.editor-table .ed-detalle-cell input[type="text"]{width:auto;flex:1;min-width:0;}
+.editor-table .ed-detalle-cell input[type="checkbox"]{flex:none;width:16px;height:16px;accent-color:var(--accent-2);cursor:pointer;}
+.editor-table tr.inactive-row .ed-detalle{color:var(--ink-faint);}
 .editor-empty-row td{
   text-align:center;
   color:var(--ink-faint);
@@ -1235,6 +1241,7 @@ function stateOf(task){
   return "progress";
 }
 const STATE_COLOR = { sin:"var(--state-pending)", upcoming:"var(--state-upcoming)", progress:"var(--state-progress)", done:"var(--state-done)" };
+function isActive(t){ return t.activo !== false; }
 const STATE_LABEL = { sin:"Sin programar", upcoming:"Por iniciar", progress:"En ejecución", done:"Completada" };
 
 
@@ -1463,19 +1470,20 @@ function renderRuler(){
 
 // ---------- KPIs ----------
 function renderKPIs(){
-  const total = TASKS.length;
-  const totalMonto = TASKS.reduce((a,t)=>a+t.monto,0);
-  const montoGasto = TASKS.filter(t=>t.tipo==="GASTO").reduce((a,t)=>a+t.monto,0);
-  const montoInv = TASKS.filter(t=>t.tipo==="INVERSION").reduce((a,t)=>a+t.monto,0);
+  const activeTasks = TASKS.filter(isActive);
+  const total = activeTasks.length;
+  const totalMonto = activeTasks.reduce((a,t)=>a+t.monto,0);
+  const montoGasto = activeTasks.filter(t=>t.tipo==="GASTO").reduce((a,t)=>a+t.monto,0);
+  const montoInv = activeTasks.filter(t=>t.tipo==="INVERSION").reduce((a,t)=>a+t.monto,0);
 
-  const agg = aggregateOverall(TASKS);
+  const agg = aggregateOverall(activeTasks);
   const avancePais = agg.pct;
   const programadas = agg.scheduledCount;
 
-  const completadas = TASKS.filter(t=>stateOf(t)==="done").length;
-  const enCurso = TASKS.filter(t=>stateOf(t)==="progress").length;
+  const completadas = activeTasks.filter(t=>stateOf(t)==="done").length;
+  const enCurso = activeTasks.filter(t=>stateOf(t)==="progress").length;
 
-  const tasksWithReal = TASKS.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
+  const tasksWithReal = activeTasks.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
   const totalReal = tasksWithReal.reduce((a,t)=>a+Number(t.real),0);
   const montoOfTasksWithReal = tasksWithReal.reduce((a,t)=>a+t.monto,0);
   let realDiffLabel = "Sin gasto real registrado aún";
@@ -1544,15 +1552,16 @@ function renderInstitutes(){
   instList.forEach((inst)=>{
     const idx = INSTITUTE_ORDER.indexOf(inst);
     const allTasks = TASKS.filter(t=>t.instituto===inst);
+    const activeTasks = allTasks.filter(isActive);
     const visibleTasks = allTasks.filter(taskMatches);
     if(visibleTasks.length===0) return;
     anyVisible = true;
 
-    const montoTotal = allTasks.reduce((a,t)=>a+t.monto,0);
-    const instAgg = aggregateOverall(allTasks);
+    const montoTotal = activeTasks.reduce((a,t)=>a+t.monto,0);
+    const instAgg = aggregateOverall(activeTasks);
     const instPct = instAgg.pct;
 
-    const realTasks = allTasks.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
+    const realTasks = activeTasks.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
     const montoRealInst = realTasks.reduce((a,t)=>a+Number(t.real),0);
     const realMetaStr = realTasks.length>0 ? ` · Real ${clp(montoRealInst)}` : "";
 
@@ -1573,7 +1582,7 @@ function renderInstitutes(){
         <span class="inst-order">${String(idx+1).padStart(2,"0")}</span>
         <span class="chevron">▶</span>
         <span class="inst-name">${label}</span>
-        <span class="inst-meta">${allTasks.length} tareas · ${clp(montoTotal)}${realMetaStr}</span>
+        <span class="inst-meta">${activeTasks.length} tareas · ${clp(montoTotal)}${realMetaStr}</span>
         <div class="inst-bar-track"><div class="inst-bar-fill" style="width:${instPct}%;background:${instPct===100?'var(--state-done)':'var(--accent)'}"></div></div>
         <span class="inst-pct">${instPct}%</span>
       </div>
@@ -1602,7 +1611,7 @@ function renderInstitutes(){
 
 function renderTaskRow(t, axis){
   const row = document.createElement("div");
-  row.className = "task-row";
+  row.className = "task-row" + (isActive(t) ? "" : " inactive");
 
   const state = stateOf(t);
   const pct = calcProgress(t);
@@ -1741,14 +1750,14 @@ document.getElementById("resetBtn").addEventListener("click", async ()=>{
 document.getElementById("exportBtn").addEventListener("click", exportCSV);
 
 function exportCSV(){
-  const rows = [["Instituto","Tarea","Tipo","Presupuesto CLP","Gasto/Inv. real CLP","Diferencia CLP","Diferencia %","Fecha inicio","Fecha término","Estado","Avance % (por días)"]];
+  const rows = [["Instituto","Tarea","Tipo","Presupuesto CLP","Gasto/Inv. real CLP","Diferencia CLP","Diferencia %","Fecha inicio","Fecha término","Estado","Avance % (por días)","Activo"]];
   TASKS.forEach(t=>{
     const p = calcProgress(t);
     const hasReal = t.real!=="" && t.real!==null && !isNaN(Number(t.real));
     const realVal = hasReal ? Number(t.real) : "";
     const diff = hasReal ? (Number(t.real)-t.monto) : "";
     const diffPct = hasReal && t.monto>0 ? Math.round((diff/t.monto)*100) : "";
-    rows.push([t.instituto, t.detalle, t.tipo, t.monto, realVal, diff, diffPct, t.inicio, t.fin, STATE_LABEL[stateOf(t)], p===null?"":p]);
+    rows.push([t.instituto, t.detalle, t.tipo, t.monto, realVal, diff, diffPct, t.inicio, t.fin, STATE_LABEL[stateOf(t)], p===null?"":p, isActive(t)?"SI":"NO"]);
   });
   const csv = rows.map(r=>r.map(cell=>{
     const s = String(cell ?? "");
@@ -1789,7 +1798,7 @@ function rerender(){
   renderMap();
   renderScope();
 
-  const scopeTasks = selectedInstitute ? TASKS.filter(t=>t.instituto===selectedInstitute) : TASKS;
+  const scopeTasks = (selectedInstitute ? TASKS.filter(t=>t.instituto===selectedInstitute) : TASKS).filter(isActive);
   const gaugeAgg = aggregateProgress(scopeTasks);
   renderGauge(gaugeAgg.pct, scopeTasks);
 
@@ -1836,6 +1845,7 @@ function renderEditorTable(){
 
   TASKS.forEach(t=>{
     const tr = document.createElement("tr");
+    tr.className = isActive(t) ? "" : "inactive-row";
     tr.dataset.id = t.id;
 
     const instOptions = INSTITUTE_ORDER.map(i=>
@@ -1844,7 +1854,7 @@ function renderEditorTable(){
 
     tr.innerHTML = `
       <td><select class="ed-instituto">${instOptions}</select></td>
-      <td><input type="text" class="ed-detalle" value="${(t.detalle||"").replace(/"/g,'&quot;')}"></td>
+      <td class="ed-detalle-cell"><input type="checkbox" class="ed-activo" title="Tarea activa (cuenta en las estadísticas)" ${isActive(t)?"checked":""}><input type="text" class="ed-detalle" value="${(t.detalle||"").replace(/"/g,'&quot;')}"></td>
       <td>
         <select class="ed-tipo">
           <option value="GASTO" ${t.tipo==="GASTO"?"selected":""}>GASTO</option>
@@ -1858,6 +1868,7 @@ function renderEditorTable(){
       <td><button class="ed-delete" title="Eliminar tarea">✕</button></td>
     `;
 
+    tr.querySelector(".ed-activo").addEventListener("change", (e)=>{ t.activo = e.target.checked; saveTasks(); renderEditorTable(); });
     tr.querySelector(".ed-instituto").addEventListener("change", (e)=>{ t.instituto = e.target.value; saveTasks(); });
     tr.querySelector(".ed-detalle").addEventListener("change", (e)=>{ t.detalle = e.target.value; saveTasks(); });
     tr.querySelector(".ed-tipo").addEventListener("change", (e)=>{ t.tipo = e.target.value; saveTasks(); });
@@ -1913,9 +1924,9 @@ document.getElementById("restoreOriginalBtn").addEventListener("click", async ()
 });
 
 function buildTasksCSV(){
-  const rows = [["Instituto","Detalle","Tipo","Presupuesto CLP","Real CLP","Inicio","Termino"]];
+  const rows = [["Instituto","Detalle","Tipo","Presupuesto CLP","Real CLP","Inicio","Termino","Activo"]];
   TASKS.forEach(t=>{
-    rows.push([t.instituto, t.detalle, t.tipo, t.monto, t.real||"", t.inicio||"", t.fin||""]);
+    rows.push([t.instituto, t.detalle, t.tipo, t.monto, t.real||"", t.inicio||"", t.fin||"", isActive(t)?"SI":"NO"]);
   });
   return rows.map(r=>r.map(cell=>{
     const s = String(cell ?? "");
@@ -2137,7 +2148,8 @@ document.getElementById("importTasksInput").addEventListener("change", (e)=>{
         monto: header.findIndex(h=>h.includes("presupuesto")||h.includes("monto")),
         real: header.findIndex(h=>h.includes("real")),
         inicio: header.findIndex(h=>h.includes("inicio")),
-        fin: header.findIndex(h=>h.includes("term")||h.includes("fin"))
+        fin: header.findIndex(h=>h.includes("term")||h.includes("fin")),
+        activo: header.findIndex(h=>h.includes("activo"))
       };
       if(idx.instituto<0 || idx.detalle<0 || idx.monto<0){
         await customAlert("El CSV debe tener al menos las columnas Instituto, Detalle y Presupuesto. Revisa el encabezado.");
@@ -2163,7 +2175,9 @@ document.getElementById("importTasksInput").addEventListener("change", (e)=>{
         const real = idx.real>=0 ? (cols[idx.real]||"").trim() : "";
         const inicio = idx.inicio>=0 ? (cols[idx.inicio]||"").trim() : "";
         const fin = idx.fin>=0 ? (cols[idx.fin]||"").trim() : "";
-        imported.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin });
+        const activoRaw = idx.activo>=0 ? (cols[idx.activo]||"").trim().toLowerCase() : "si";
+        const activo = !(activoRaw==="no" || activoRaw==="0" || activoRaw==="false");
+        imported.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo });
       }
 
       if(imported.length===0){
