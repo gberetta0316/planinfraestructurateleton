@@ -17,7 +17,7 @@ Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;47
 Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;;;NO;NO
 Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;;;;SI;SI
 Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;NO;NO
-Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento;GASTO;6000000;;;;NO;NO
+Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento (EFECTUADO);GASTO;6000000;1000000;2026-07-06;2026-07-08;SI;SI
 Coquimbo;Cierre Terraza en 2° piso para habilitar para reuniones con equipo y padres.;GASTO;3000000;;;;NO;NO
 Santiago;"Separación de modulos movilización para creación de 2 box medicos, (Coordindor de LOP)";GASTO;7000000;;;;NO;NO
 Santiago;Remodelación recepción Guardias Titan (muebles nuevos y pintura);GASTO;1000000;;;;NO;NO
@@ -70,7 +70,7 @@ Iquique;Cambio de Grupo Electrógeno;INVERSION;15000000;;;;NO;NO
 Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;12581270;;;SI;SI
 Calama;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
 Copiapo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
-Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;;;;NO;NO
+Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;;;;SI;SI
 Coquimbo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
 Santiago;Unificación de sistema de respaldo de agua del edificio B con edificio A;INVERSION;8000000;;;;NO;NO
 Arica;Construir bodega en cancha (Modular);INVERSION;5000000;;;;SI;SI
