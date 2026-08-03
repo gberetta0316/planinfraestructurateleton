@@ -7,15 +7,15 @@ Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;;SI;SI
 Iquique;Limpieza y pintura de fachada del Instituto en evidente deterioro.;GASTO;6000000;;;;SI;SI
 Iquique;Traslado de UTAC-Arte a primer piso (patio central).;GASTO;5950000;;;;NO;NO
 Iquique;Ampliación sala UTAC-Música.;GASTO;8330000;;;;NO;NO
-Calama;Cambio de pavimento en UEDA de alfombra a vinilico (POSTERGADO POR IT);GASTO;4760000;;;;NO;NO
+Calama;Cambio de pavimento en UEDA de alfombra a vinilico (IT DECIDE CAMBIARLO POR MUEBLE RECEPCION);GASTO;4760000;;;;NO;NO
 Calama;Sombreado fijo para estacionamiento. (actividades con pacientes y campaña);INVERSION;29990000;;;;SI;SI
 Calama;Ampliación sala de UTA para sala multiuso. Proyecto GI;INVERSION;41650000;;;;NO;NO
 Calama;Reemplazo de ceramicas camarin mujeres. La gran mayoria esta quebrada;GASTO;5000000;;;;NO;NO
-Antofagasta;Cambio de equipo de AC de cafeteria ( 2 unidades caset piso cielo);INVERSION;4600000;;;;SI;SI
-Antofagasta;Normalizar sistema de bombeo de circulación de  piscina ( faltante 2 Bombas );INVERSION;1785000;1785000;2026-07-12;2026-07-17;SI;NO
-Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;;;;NO;NO
+Antofagasta;Cambio de equipo de AC de cafeteria ( 2 unidades caset piso cielo);INVERSION;4600000;4461072;;;SI;SI
+Antofagasta;Normalizar sistema de bombeo de circulación de  piscina ( faltante 2 Bombas );INVERSION;1785000;1785000;2026-07-12;2026-07-17;SI;SI
+Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;;;;SI;SI
 Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;;;NO;NO
-Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;;;;NO;NO
+Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;;;;SI;SI
 Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;NO;NO
 Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento;GASTO;6000000;;;;NO;NO
 Coquimbo;Cierre Terraza en 2° piso para habilitar para reuniones con equipo y padres.;GASTO;3000000;;;;NO;NO
@@ -67,7 +67,7 @@ Puerto Montt;Instalacion de AP para lavamanos en Sala de Arte;GASTO;1785000;;;;N
 Coyhaique;Mejoramiento de puerta de bodega pellet;GASTO;1000000;;;;NO;NO
 Coyhaique;Cambio de iluminación fluorescente a Led;GASTO;600000;;;;NO;NO
 Iquique;Cambio de Grupo Electrógeno;INVERSION;15000000;;;;NO;NO
-Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;;;;SI;SI
+Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;12581270;;;SI;SI
 Calama;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
 Copiapo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
 Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;;;;NO;NO
