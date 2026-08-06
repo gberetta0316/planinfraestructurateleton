@@ -1061,18 +1061,47 @@ const filters = { query:"", tipo:"all", estado:"all" };
 
 // ---------- progress calc (day-based) ----------
 // Returns {duration, elapsed} in days for a task with valid dates, or null if not schedulable.
-// Accepts common alternate date formats (e.g. DD-MM-YYYY / DD/MM/YYYY, as produced
-// by Excel when a CSV is opened and re-saved in a Spanish locale) and normalizes
-// them to the ISO YYYY-MM-DD format the rest of the app assumes. Unrecognized
-// formats return "" (treated as no date) instead of silently corrupting downstream math.
+// Accepts common alternate date formats a CSV can arrive in from Excel — DD-MM-YYYY or
+// DD/MM/YYYY text (from opening/saving in a Spanish locale), "14-Jul-2026" style month
+// abbreviations, and raw Excel serial date numbers (e.g. 46246, days since 1899-12-30 —
+// what you get if a CSV export pulls the underlying cell value instead of its displayed
+// text) — and normalizes them all to the ISO YYYY-MM-DD format the rest of the app
+// assumes. Unrecognized formats return "" (treated as no date) instead of silently
+// corrupting downstream math.
+const MONTH_ABBR = {
+  ene:1, jan:1, feb:2, mar:3, abr:4, apr:4, may:5, jun:6, jul:7,
+  ago:8, aug:8, sep:9, set:9, oct:10, nov:11, dic:12, dec:12
+};
 function normalizeDate(str){
   if(!str) return "";
   str = String(str).trim();
   if(/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
-  let m = str.match(/^(\d{2})[/-](\d{2})[/-](\d{4})$/);
-  if(m) return `${m[3]}-${m[2]}-${m[1]}`;
-  m = str.match(/^(\d{4})[/.](\d{2})[/.](\d{2})$/);
-  if(m) return `${m[1]}-${m[2]}-${m[3]}`;
+
+  let m = str.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+  if(m) return `${m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}`;
+
+  m = str.match(/^(\d{4})[/.](\d{1,2})[/.](\d{1,2})$/);
+  if(m) return `${m[1]}-${m[2].padStart(2,"0")}-${m[3].padStart(2,"0")}`;
+
+  m = str.match(/^(\d{1,2})[-\s]([a-zA-Zé]{3,4})[-\s](\d{2,4})$/);
+  if(m){
+    const mon = MONTH_ABBR[m[2].toLowerCase().slice(0,3)];
+    if(mon){
+      const yyyy = m[3].length===2 ? (Number(m[3])<70 ? "20"+m[3] : "19"+m[3]) : m[3];
+      return `${yyyy}-${String(mon).padStart(2,"0")}-${m[1].padStart(2,"0")}`;
+    }
+  }
+
+  if(/^\d{4,6}(\.\d+)?$/.test(str)){
+    const serial = Number(str);
+    if(serial > 20000 && serial < 80000){
+      const d = new Date(Date.UTC(1899, 11, 30) + Math.round(serial) * 86400000);
+      if(!isNaN(d)){
+        return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`;
+      }
+    }
+  }
+
   return "";
 }
 function taskDays(task){
