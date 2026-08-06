@@ -1767,7 +1767,11 @@ function parseTasksCSV(text){
 
 async function loadPublishedData(){
   try{
-    const res = await fetch("./data.csv", {cache:"no-store"});
+    // GitHub Pages' CDN caches static files for several minutes regardless of fetch
+    // options, and Pages doesn't allow custom Cache-Control headers to shorten that —
+    // so a cache-busting query string forces every load to hit a "new" URL the CDN
+    // hasn't cached yet, bypassing the delay entirely.
+    const res = await fetch("./data.csv?t=" + Date.now(), {cache:"no-store"});
     if(res.ok){
       const text = await res.text();
       const parsed = parseTasksCSV(text);
