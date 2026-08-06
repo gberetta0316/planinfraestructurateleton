@@ -942,7 +942,7 @@ footer.note{
   </div>
   <div class="panel">
     <div class="panel-head">
-      <div class="panel-title">Avance <b>· tareas programadas</b></div>
+      <div class="panel-title" id="gaugeTitle">Avance Tareas Completadas <b>· Total nacional</b></div>
     </div>
     <div class="gauge-wrap" id="gaugeWrap"></div>
     <div class="gauge-sub" id="gaugeSub"></div>
@@ -1485,13 +1485,13 @@ function renderGauge(pct, activeTasks, totalCount){
     sub.innerHTML = `Sin tareas en esta vista`;
   } else {
     sub.innerHTML = `
-      <div><b>${activeCount}</b> de <b>${totalCount}</b> tareas activadas</div>
+      <div><b>${doneCount}</b> de <b>${totalCount}</b> tareas completadas</div>
       ${scheduledCount>0 ? `<div class="gauge-breakdown">
         <span style="color:var(--state-done)">${doneCount} completada${doneCount===1?'':'s'}</span> ·
         <span style="color:var(--state-progress)">${progressCount} en curso</span> ·
         <span style="color:var(--state-upcoming)">${upcomingCount} por iniciar</span>
       </div>` : ""}
-      <div class="gauge-note">Porcentaje de tareas activadas sobre el total de tareas del plan.</div>
+      <div class="gauge-note">Porcentaje de tareas completadas sobre el total de tareas del plan.</div>
     `;
   }
 }
@@ -1861,8 +1861,11 @@ function rerender(){
 
   const scopeAllTasks = selectedInstitute ? TASKS.filter(t=>t.instituto===selectedInstitute) : TASKS;
   const scopeActiveTasks = scopeAllTasks.filter(isActive);
-  const gaugePct = scopeAllTasks.length>0 ? Math.round((scopeActiveTasks.length/scopeAllTasks.length)*100) : 0;
+  const scopeCompleted = scopeActiveTasks.filter(t=>stateOf(t)==="done").length;
+  const gaugePct = scopeAllTasks.length>0 ? Math.round((scopeCompleted/scopeAllTasks.length)*100) : 0;
   renderGauge(gaugePct, scopeActiveTasks, scopeAllTasks.length);
+  document.getElementById("gaugeTitle").innerHTML =
+    `Avance Tareas Completadas <b>· ${selectedInstitute ? (INSTITUTE_LABEL[selectedInstitute] || selectedInstitute) : "Total nacional"}</b>`;
 
   renderInstitutes();
 }
