@@ -1329,7 +1329,7 @@ function renderMap(){
     const label = INSTITUTE_LABEL[inst] || inst;
     const shortLabel = label.length>11 ? (inst==="Puerto Montt"?"P. Montt":label) : label;
     const instTasksForMap = TASKS.filter(t=>t.instituto===inst).filter(isActive);
-    const instPctMap = aggregateOverall(instTasksForMap).pct;
+    const instPctMap = aggregateProgress(instTasksForMap).pct; // Avance de ejecución: días en ejecución / días programados
     const stem = `<line x1="${x}" y1="${centerY}" x2="${x}" y2="${botY+16}" stroke="var(--line)" stroke-width="1"/>`;
     const marker = isCapital
       ? `<path class="cap-star" transform="translate(${x},${centerY}) scale(1)" d="M0,-7 L2,-2 L7,-2 L3,1 L4.5,6.5 L0,3.3 L-4.5,6.5 L-3,1 L-7,-2 L-2,-2 Z"/>`
