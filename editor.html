@@ -189,6 +189,7 @@ h1{
 }
 .map-node:hover .lbl{fill:var(--accent-2);}
 .map-node.selected .lbl{fill:var(--accent);font-weight:600;}
+.map-node .lbl-pct{fill:var(--ink-faint);font-weight:400;}
 .map-node .cap-star{fill:var(--accent-2);}
 .map-node.selected .cap-star{fill:var(--accent);}
 .map-hint{
@@ -1327,6 +1328,8 @@ function renderMap(){
     const isSel = selectedInstitute===inst;
     const label = INSTITUTE_LABEL[inst] || inst;
     const shortLabel = label.length>11 ? (inst==="Puerto Montt"?"P. Montt":label) : label;
+    const instTasksForMap = TASKS.filter(t=>t.instituto===inst).filter(isActive);
+    const instPctMap = aggregateOverall(instTasksForMap).pct;
     const stem = `<line x1="${x}" y1="${centerY}" x2="${x}" y2="${botY+16}" stroke="var(--line)" stroke-width="1"/>`;
     const marker = isCapital
       ? `<path class="cap-star" transform="translate(${x},${centerY}) scale(1)" d="M0,-7 L2,-2 L7,-2 L3,1 L4.5,6.5 L0,3.3 L-4.5,6.5 L-3,1 L-7,-2 L-2,-2 Z"/>`
@@ -1336,7 +1339,7 @@ function renderMap(){
         <circle cx="${x}" cy="${centerY}" r="16" fill="transparent"/>
         ${stem}
         ${marker}
-        <text class="lbl" x="${x+4}" y="${botY+28}" transform="rotate(-38 ${x+4} ${botY+28})" text-anchor="end">${shortLabel}</text>
+        <text class="lbl" x="${x+4}" y="${botY+28}" transform="rotate(-38 ${x+4} ${botY+28})" text-anchor="end">${shortLabel} <tspan class="lbl-pct">${instPctMap}%</tspan></text>
       </g>`;
   });
 
@@ -1372,13 +1375,13 @@ function describeArc(cx,cy,r,tStart,tEnd){
   const largeArc = (tEnd-tStart) > 0.5 ? 1 : 0;
   return `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
 }
-function renderGauge(pct, scopeTasks){
+function renderGauge(pct, activeTasks, totalCount){
   const wrap = document.getElementById("gaugeWrap");
   const sub = document.getElementById("gaugeSub");
   const W=260,H=160, cx=130, cy=140, r=104;
 
-  const scheduled = scopeTasks.filter(t=>taskDays(t)!==null);
-  const totalCount = scopeTasks.length;
+  const activeCount = activeTasks.length;
+  const scheduled = activeTasks.filter(t=>taskDays(t)!==null);
   const scheduledCount = scheduled.length;
   const doneCount = scheduled.filter(t=>stateOf(t)==="done").length;
   const progressCount = scheduled.filter(t=>stateOf(t)==="progress").length;
@@ -1429,17 +1432,15 @@ function renderGauge(pct, scopeTasks){
 
   if(totalCount===0){
     sub.innerHTML = `Sin tareas en esta vista`;
-  } else if(scheduledCount===0){
-    sub.innerHTML = `<b>0</b> de <b>${totalCount}</b> tareas programadas — ingresa fechas para ver el avance`;
   } else {
     sub.innerHTML = `
-      <div><b>${scheduledCount}</b> de <b>${totalCount}</b> tareas programadas</div>
-      <div class="gauge-breakdown">
+      <div><b>${activeCount}</b> de <b>${totalCount}</b> tareas activadas</div>
+      ${scheduledCount>0 ? `<div class="gauge-breakdown">
         <span style="color:var(--state-done)">${doneCount} completada${doneCount===1?'':'s'}</span> ·
         <span style="color:var(--state-progress)">${progressCount} en curso</span> ·
         <span style="color:var(--state-upcoming)">${upcomingCount} por iniciar</span>
-      </div>
-      <div class="gauge-note">Ponderado por días de cada tarea, no por cantidad de tareas — una tarea corta ya cerrada pesa según su duración.</div>
+      </div>` : ""}
+      <div class="gauge-note">Porcentaje de tareas activadas sobre el total de tareas del plan.</div>
     `;
   }
 }
@@ -1807,9 +1808,10 @@ function rerender(){
   renderMap();
   renderScope();
 
-  const scopeTasks = (selectedInstitute ? TASKS.filter(t=>t.instituto===selectedInstitute) : TASKS).filter(isActive);
-  const gaugeAgg = aggregateProgress(scopeTasks);
-  renderGauge(gaugeAgg.pct, scopeTasks);
+  const scopeAllTasks = selectedInstitute ? TASKS.filter(t=>t.instituto===selectedInstitute) : TASKS;
+  const scopeActiveTasks = scopeAllTasks.filter(isActive);
+  const gaugePct = scopeAllTasks.length>0 ? Math.round((scopeActiveTasks.length/scopeAllTasks.length)*100) : 0;
+  renderGauge(gaugePct, scopeActiveTasks, scopeAllTasks.length);
 
   renderInstitutes();
 }
@@ -1847,12 +1849,13 @@ document.addEventListener("keydown", (e)=>{
 
 function renderEditorTable(){
   editorTableBody.innerHTML = "";
+  const sortedTasks = [...TASKS].sort((a,b)=> INSTITUTE_ORDER.indexOf(a.instituto) - INSTITUTE_ORDER.indexOf(b.instituto));
 
   if(TASKS.length===0){
     editorTableBody.innerHTML = `<tr class="editor-empty-row"><td colspan="9">No hay tareas. Usa "+ Agregar tarea" para crear la primera.</td></tr>`;
   }
 
-  TASKS.forEach(t=>{
+  sortedTasks.forEach(t=>{
     const tr = document.createElement("tr");
     tr.className = isActive(t) ? "" : "inactive-row";
     tr.dataset.id = t.id;
@@ -1916,12 +1919,12 @@ document.getElementById("addTaskBtn").addEventListener("click", ()=>{
   TASKS.push(newTask);
   saveTasks();
   renderEditorTable();
-  // scroll to and focus the new row's detail field
-  const rows = editorTableBody.querySelectorAll("tr");
-  const lastRow = rows[rows.length-1];
-  if(lastRow){
-    lastRow.scrollIntoView({block:"center"});
-    const input = lastRow.querySelector(".ed-detalle");
+  // scroll to and focus the new row's detail field (the table is sorted by institute,
+  // so the new task's row isn't necessarily last — find it by id instead)
+  const newRow = editorTableBody.querySelector(`tr[data-id="${newTask.id}"]`);
+  if(newRow){
+    newRow.scrollIntoView({block:"center"});
+    const input = newRow.querySelector(".ed-detalle");
     if(input) input.focus();
   }
 });
