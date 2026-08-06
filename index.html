@@ -1061,6 +1061,20 @@ const filters = { query:"", tipo:"all", estado:"all" };
 
 // ---------- progress calc (day-based) ----------
 // Returns {duration, elapsed} in days for a task with valid dates, or null if not schedulable.
+// Accepts common alternate date formats (e.g. DD-MM-YYYY / DD/MM/YYYY, as produced
+// by Excel when a CSV is opened and re-saved in a Spanish locale) and normalizes
+// them to the ISO YYYY-MM-DD format the rest of the app assumes. Unrecognized
+// formats return "" (treated as no date) instead of silently corrupting downstream math.
+function normalizeDate(str){
+  if(!str) return "";
+  str = String(str).trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+  let m = str.match(/^(\d{2})[/-](\d{2})[/-](\d{4})$/);
+  if(m) return `${m[3]}-${m[2]}-${m[1]}`;
+  m = str.match(/^(\d{4})[/.](\d{2})[/.](\d{2})$/);
+  if(m) return `${m[1]}-${m[2]}-${m[3]}`;
+  return "";
+}
 function taskDays(task){
   if(!task.inicio || !task.fin) return null;
   const s = new Date(task.inicio+"T00:00:00");
@@ -1740,8 +1754,8 @@ function parseTasksCSV(text){
     const tipo = tipoRaw.startsWith("INV") ? "INVERSION" : "GASTO";
     const monto = idx.monto>=0 ? (Number(String(cols[idx.monto]).replace(/[^0-9.-]/g,""))||0) : 0;
     const real = idx.real>=0 ? (cols[idx.real]||"").trim() : "";
-    const inicio = idx.inicio>=0 ? (cols[idx.inicio]||"").trim() : "";
-    const fin = idx.fin>=0 ? (cols[idx.fin]||"").trim() : "";
+    const inicio = idx.inicio>=0 ? normalizeDate((cols[idx.inicio]||"").trim()) : "";
+    const fin = idx.fin>=0 ? normalizeDate((cols[idx.fin]||"").trim()) : "";
     const activoRaw = idx.activo>=0 ? (cols[idx.activo]||"").trim().toLowerCase() : "si";
     const activo = !(activoRaw==="no" || activoRaw==="0" || activoRaw==="false");
     const cotizacionRaw = idx.cotizacion>=0 ? (cols[idx.cotizacion]||"").trim().toLowerCase() : "no";
