@@ -2,7 +2,7 @@
 Arica;Colocar Techo fuera de bodega general;GASTO;1725500;1725500;;;SI;SI
 Arica;Instalar cortina de aire en comedor;INVERSION;1368500;;;;SI;SI
 Arica;Mejorar paredes perimetrales de cancha con evidente deterioro (IT DECIDE REALIZARLO);GASTO;2294320;327155;2026-07-26;2026-07-30;NO;NO
-Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;820000;02-08-2026;05-08-2026;SI;SI
+Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;820000;;;SI;SI
 Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;;SI;SI
 Iquique;Limpieza y pintura de fachada del Instituto en evidente deterioro.;GASTO;6000000;3;2026-08-02;2026-08-08;SI;SI
 Iquique;Traslado de UTAC-Arte a primer piso (patio central).;GASTO;5950000;;;;NO;NO
@@ -73,5 +73,5 @@ Copiapo;Suministro e instalación de planta solar térmica para aporte de ACS a 
 Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;;;;SI;SI
 Coquimbo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
 Santiago;Unificación de sistema de respaldo de agua del edificio B con edificio A;INVERSION;8000000;;;;NO;NO
-Arica;Construir bodega en cancha (Modular);INVERSION;5000000;;23-08-2026;03-09-2026;SI;SI
+Arica;Construir bodega en cancha (Modular);INVERSION;5000000;;;;SI;SI
 Calama;Mejora en meson de recepcion;GASTO;3500000;;;;SI;SI
