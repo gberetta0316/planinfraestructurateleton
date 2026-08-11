@@ -64,8 +64,8 @@ Puerto Montt;Ampliacion sala para padres;INVERSION;10000000;;;;SI;NO
 Puerto Montt;Instalar techo  en pasillo de acceso a unidad de movilizacion;GASTO;15000000;;;;SI;SI
 Puerto Montt;Mejoramiento interior Sala REAS;GASTO;3000000;;;;SI;SI
 Puerto Montt;Instalacion de AP para lavamanos en Sala de Arte;GASTO;1785000;;;;SI;SI
-Coyhaique;Mejoramiento de puerta de bodega pellet;GASTO;1000000;;;;NO;NO
-Coyhaique;Cambio de iluminación fluorescente a Led;GASTO;600000;;;;NO;NO
+Coyhaique;Mejoramiento de puerta de bodega pellet (NO IRIA CON NUEVA SALA CALDERAS A GAS);GASTO;1000000;;;;NO;NO
+Coyhaique;Cambio de iluminación fluorescente a Led;GASTO;600000;;;;SI;SI
 Iquique;Cambio de Grupo Electrógeno;INVERSION;15000000;;;;SI;SI
 Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;12581270;;;SI;SI
 Calama;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;SI;SI
