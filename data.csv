@@ -19,29 +19,29 @@ Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espaci
 Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;SI;NO
 Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento (EFECTUADO);GASTO;6000000;1000000;2026-07-06;2026-07-08;SI;SI
 Coquimbo;Cierre Terraza en 2° piso para habilitar para reuniones con equipo y padres.;GASTO;3000000;;;;NO;NO
-Santiago;"Separación de modulos movilización para creación de 2 box medicos, (Coordindor de LOP)";GASTO;7000000;;;;NO;NO
-Santiago;Remodelación recepción Guardias Titan (muebles nuevos y pintura);GASTO;1000000;;;;NO;NO
-Santiago;"Renovar empavonado Sector Box Lop, dañado y sucio";GASTO;890000;;;;NO;NO
-Santiago;Renovar iluminación salas y oficinas de  kinesiología;GASTO;3900000;;;;NO;NO
-Santiago;Aumento capacidad electrica Grupo electrogeno edificio A;INVERSION;30000000;;;;NO;NO
-Santiago;Instalacion de espejos sala UTAC ciclodanza;GASTO;4000000;;;;NO;NO
-Santiago;Galpón LOP renovar lavafondo acero inoxidable por corrosión - sala de yeso;GASTO;2000000;;;;NO;NO
-Santiago;Galpón Lop Mejoramiento extracción sala de Laminado y Tabartería;GASTO;4000000;;;;NO;NO
-Santiago;Modificacion de oficinas y puestos de trabajo en Galpon LOP - PARTE 1 (piso superior);INVERSION;78000000;;;;NO;NO
+Santiago;"Separación de modulos movilización para creación de 2 box medicos, (Coordindor de LOP)";GASTO;7000000;;;;SI;SI
+Santiago;Remodelación recepción Guardias Titan (muebles nuevos y pintura);GASTO;1000000;;;;SI;SI
+Santiago;"Renovar empavonado Sector Box Lop, dañado y sucio";GASTO;890000;;;;SI;SI
+Santiago;Renovar iluminación salas y oficinas de  kinesiología;GASTO;3900000;;;;SI;SI
+Santiago;Aumento capacidad electrica Grupo electrogeno edificio A;INVERSION;30000000;;;;SI;SI
+Santiago;Instalacion de espejos sala UTAC ciclodanza;GASTO;4000000;;;;SI;SI
+Santiago;Galpón LOP renovar lavafondo acero inoxidable por corrosión - sala de yeso;GASTO;2000000;;;;SI;SI
+Santiago;Galpón Lop Mejoramiento extracción sala de Laminado y Tabartería;GASTO;4000000;;;;SI;SI
+Santiago;Modificacion de oficinas y puestos de trabajo en Galpon LOP - PARTE 1 (piso superior);INVERSION;78000000;;;;SI;SI
 Valparaiso;Extractores en baños de personal (extractor centrifugo de simple aspiración);GASTO;3400000;;;;NO;NO
 Valparaiso;Mudador para pacientes;GASTO;4300000;;;;NO;NO
-Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;;;;NO;NO
+Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;;;;SI;SI
 Valparaiso;Reparación y sellado de paredes interior IT (humedad);GASTO;1500000;;;;NO;NO
 Valparaiso;Pintura exterior escalera;GASTO;2150000;;;;NO;NO
-Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;;;;NO;NO
+Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;;;;SI;SI
 Valparaiso;Cierre hacia enfermería (que impida el libre tránsito de pacientes);GASTO;1500000;;;;NO;NO
-Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha;GASTO;17000000;;;;NO;NO
+Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha (PRIMERO SE ESPERA ARREGLAR PISO POR POST VENTA);GASTO;17000000;;;;NO;NO
 Talca;Modificación de pendiente de la cubierta del estacionamiento de vehículos institucionales.;GASTO;5000000;;;;NO;NO
-Talca;Construcción de acceso con rampa al estacionamiento interior del edificio (nueva mampara).;GASTO;9000000;;;;NO;NO
-Talca;Nuevo toldo estructural en entrada principal (para dejar y retirar pacientes).;INVERSION;20000000;;;;NO;NO
-Talca;Construcción de biblioteca en archivo de fichas clínicas.;INVERSION;15000000;;;;NO;NO
-Talca;Remodelación del área para la sala de descanso de TO.;GASTO;4000000;;;;NO;NO
-Talca;Mejoramiento y sellado de la pirámide vidriada y el pasillo central (enfermería);GASTO;2000000;;;;NO;NO
+Talca;Construcción de acceso con rampa al estacionamiento interior del edificio (nueva mampara). SE POSTERGA POR PRIORIDAD VP;GASTO;9000000;;;;NO;NO
+Talca;Nuevo toldo estructural en entrada principal (para dejar y retirar pacientes).;INVERSION;20000000;;;;SI;SI
+Talca;Construcción de biblioteca en archivo de fichas clínicas.;INVERSION;15000000;;;;SI;SI
+Talca;Remodelación del área para la sala de descanso de TO.;GASTO;4000000;;;;SI;SI
+Talca;Mejoramiento y sellado de la pirámide vidriada y el pasillo central (enfermería);GASTO;2000000;;;;SI;SI
 Concepcion;Instalación de termos de agua caliente para optimizar el uso de las calderas;INVERSION;3000000;;;;SI;SI
 Concepcion;Mejorar infraestructura para prevenir el ingreso de palomas al interior del instituto;GASTO;7000000;;;;SI;SI
 Concepcion;Trabajos de reparacion restantes para eliminar zonas de goteras historicas;GASTO;5000000;;;;SI;SI
