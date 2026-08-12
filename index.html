@@ -267,7 +267,7 @@ h1{
   margin:22px auto 0;
   padding:0 24px;
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(6,1fr);
   gap:1px;
   background:var(--line-soft);
   border:1px solid var(--line-soft);
@@ -1414,17 +1414,13 @@ function renderKPIs(){
   const completadas = activeTasks.filter(t=>stateOf(t)==="done").length;
   const enCurso = activeTasks.filter(t=>stateOf(t)==="progress").length;
 
-  const tasksWithReal = activeTasks.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
-  const totalReal = tasksWithReal.reduce((a,t)=>a+Number(t.real),0);
-  const montoOfTasksWithReal = tasksWithReal.reduce((a,t)=>a+t.monto,0);
-  let realDiffLabel = "Sin gasto real registrado aún";
-  let realDiffColor = "var(--ink-faint)";
-  if(tasksWithReal.length>0 && montoOfTasksWithReal>0){
-    const diffPct = Math.round(((totalReal-montoOfTasksWithReal)/montoOfTasksWithReal)*100);
-    realDiffColor = diffPct<=0 ? "var(--state-done)" : "var(--danger)";
-    realDiffLabel = (diffPct<=0? "▼ ":"▲ ") + Math.abs(diffPct) + "% vs. presupuestado (" + tasksWithReal.length + "/" + total + " tareas)";
-  }
-  const pctExecutado = totalMonto>0 ? Math.round((totalReal/totalMonto)*100) : 0;
+  const hasReal = t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real));
+  const planGastoTotal = TASKS.filter(t=>t.tipo==="GASTO").reduce((a,t)=>a+t.monto,0);
+  const planInvTotal = TASKS.filter(t=>t.tipo==="INVERSION").reduce((a,t)=>a+t.monto,0);
+  const gastoRealCompletadas = activeTasks.filter(t=>t.tipo==="GASTO" && stateOf(t)==="done" && hasReal(t)).reduce((a,t)=>a+Number(t.real),0);
+  const invRealCompletadas = activeTasks.filter(t=>t.tipo==="INVERSION" && stateOf(t)==="done" && hasReal(t)).reduce((a,t)=>a+Number(t.real),0);
+  const gastoPct = planGastoTotal>0 ? Math.round((gastoRealCompletadas/planGastoTotal)*100) : 0;
+  const invPct = planInvTotal>0 ? Math.round((invRealCompletadas/planInvTotal)*100) : 0;
 
   const kpis = document.getElementById("kpis");
   kpis.innerHTML = `
@@ -1451,10 +1447,16 @@ function renderKPIs(){
       <div class="sub">de ${total} tareas totales</div>
     </div>
     <div class="kpi">
-      <div class="label">Gasto real registrado</div>
-      <div class="value" style="font-size:20px">${clp(totalReal)}</div>
-      <div class="kpi-bar"><div style="width:${Math.min(pctExecutado,100)}%;background:${realDiffColor}"></div></div>
-      <div class="sub" style="color:${realDiffColor}">${realDiffLabel}</div>
+      <div class="label">Gasto: presupuestado vs. real completado</div>
+      <div class="value" style="font-size:16px">${clp(gastoRealCompletadas)} <small>/ ${clp(planGastoTotal)}</small></div>
+      <div class="kpi-bar"><div style="width:${Math.min(gastoPct,100)}%"></div></div>
+      <div class="sub">${gastoPct}% · gasto real de tareas completadas vs. presupuesto total del plan</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Inversión: presupuestada vs. real completada</div>
+      <div class="value" style="font-size:16px">${clp(invRealCompletadas)} <small>/ ${clp(planInvTotal)}</small></div>
+      <div class="kpi-bar"><div style="width:${Math.min(invPct,100)}%"></div></div>
+      <div class="sub">${invPct}% · inversión real de tareas completadas vs. presupuesto total del plan</div>
     </div>
   `;
 }
