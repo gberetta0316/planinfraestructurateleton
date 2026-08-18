@@ -77,3 +77,5 @@ Arica;Construir bodega en cancha (Modular);INVERSION;5000000;;;;SI;SI
 Calama;Mejora en meson de recepcion;GASTO;3500000;;;;SI;SI
 Temuco;Reemplazo de Caldera (Cambio a Gas);INVERSION;0;0;2026-08-10;2026-08-28;SI;SI
 Puerto Montt;Reemplazo de Caldera (Cambio a Gas);INVERSION;0;0;2026-08-10;2026-08-27;SI;SI
+Coyhaique;Reemplazo de Caldera (Cambio a Gas);INVERSION;0;0;2026-08-17;2026-09-01;SI;NO
+Valdivia;Reemplazo de Caldera (Cambio a Gas);INVERSION;0;;2026-08-21;2026-09-04;SI;NO
