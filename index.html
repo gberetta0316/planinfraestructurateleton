@@ -309,6 +309,8 @@ h1{
   overflow:hidden;
 }
 .kpi-bar > div{height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));}
+.kpi-pie-row{display:flex;align-items:center;gap:12px;}
+.kpi-pie{flex:none;}
 
 @media (max-width:900px){
   .kpis{grid-template-columns:repeat(2,1fr);}
@@ -1300,6 +1302,17 @@ function describeArc(cx,cy,r,tStart,tEnd){
   const largeArc = (tEnd-tStart) > 0.5 ? 1 : 0;
   return `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
 }
+// Full-circle pie wedge (startFrac/endFrac in [0,1], 0 = 12 o'clock, clockwise).
+function pieWedgePath(cx,cy,r,startFrac,endFrac){
+  function pt(frac){
+    const angle = -90 + frac*360;
+    const rad = angle*Math.PI/180;
+    return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) };
+  }
+  const p1 = pt(startFrac), p2 = pt(endFrac);
+  const largeArc = (endFrac-startFrac) > 0.5 ? 1 : 0;
+  return `M ${cx} ${cy} L ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)} Z`;
+}
 function renderGauge(pct, activeTasks, totalCount){
   const wrap = document.getElementById("gaugeWrap");
   const sub = document.getElementById("gaugeSub");
@@ -1409,7 +1422,20 @@ function renderKPIs(){
 
   const agg = aggregateOverall(activeTasks);
   const avancePais = agg.pct;
-  const programadas = agg.scheduledCount;
+  const cotizCount = TASKS.filter(t=>t.cotizacion).length;
+  const cotizFrac = TASKS.length>0 ? cotizCount/TASKS.length : 0;
+  const cotizPct = Math.round(cotizFrac*100);
+  const pieCx=28, pieCy=28, pieR=24;
+  let cotizPieSvg;
+  if(cotizFrac<=0.0001){
+    cotizPieSvg = `<circle cx="${pieCx}" cy="${pieCy}" r="${pieR}" fill="var(--bg-panel-2)" stroke="var(--line)" stroke-width="1"/>`;
+  } else if(cotizFrac>=0.9999){
+    cotizPieSvg = `<circle cx="${pieCx}" cy="${pieCy}" r="${pieR}" fill="#F2C94C"/>`;
+  } else {
+    const wedgeResto = pieWedgePath(pieCx,pieCy,pieR,cotizFrac,1);
+    const wedgeCotiz = pieWedgePath(pieCx,pieCy,pieR,0,cotizFrac);
+    cotizPieSvg = `<path d="${wedgeResto}" fill="var(--bg-panel-2)" stroke="var(--bg-panel)" stroke-width="1"/><path d="${wedgeCotiz}" fill="#F2C94C" stroke="var(--bg-panel)" stroke-width="1"/>`;
+  }
 
   const completadas = activeTasks.filter(t=>stateOf(t)==="done").length;
   const enCurso = activeTasks.filter(t=>stateOf(t)==="progress").length;
@@ -1437,9 +1463,12 @@ function renderKPIs(){
       <div class="sub">${pctPlanActivo}% del plan activado · Gasto ${clp(montoGasto)} · Inversión ${clp(montoInv)}</div>
     </div>
     <div class="kpi">
-      <div class="label">Tareas programadas</div>
-      <div class="value">${programadas}<small> / ${total}</small></div>
-      <div class="sub">con fecha de inicio y término</div>
+      <div class="label">Cantidad de trabajos en cotización</div>
+      <div class="kpi-pie-row">
+        <svg class="kpi-pie" viewBox="0 0 56 56" width="56" height="56">${cotizPieSvg}</svg>
+        <div class="value">${cotizPct}<small>%</small></div>
+      </div>
+      <div class="sub">${cotizCount} de ${TASKS.length} tareas en cotización</div>
     </div>
     <div class="kpi">
       <div class="label">En ejecución / completadas</div>
