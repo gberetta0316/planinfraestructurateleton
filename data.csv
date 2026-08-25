@@ -16,7 +16,7 @@ Antofagasta;Normalizar sistema de bombeo de circulación de  piscina ( faltante 
 Antofagasta;Instalación cortina faltante (black out) frontis admisión;GASTO;476000;;;;SI;SI
 Antofagasta;"Implementación sala de Musica y adquisición de linóleo de Danza, en patio exterior";INVERSION;45000000;;;;NO;NO
 Copiapo;Construir garita frontal. A actual  no cuenta con ventilación ni espacio;GASTO;5500000;3650000;;;SI;SI
-Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;SI;NO
+Copiapo;Habilitar baño y camarín en sector piscina. Protocolo de espacios separados;GASTO;3000000;;;;SI;SI
 Coquimbo;Instalacion sistema de apertura automatica de Portones de estacionamiento (EFECTUADO);GASTO;6000000;600000;2026-07-06;2026-07-08;SI;SI
 Coquimbo;Cierre Terraza en 2° piso para habilitar para reuniones con equipo y padres.;GASTO;3000000;;;;NO;NO
 Santiago;"Separación de modulos movilización para creación de 2 box medicos, (Coordindor de LOP)";GASTO;7000000;;;;SI;SI
@@ -35,7 +35,7 @@ Valparaiso;Reparación y sellado de paredes interior IT (humedad);GASTO;1500000;
 Valparaiso;Pintura exterior escalera;GASTO;2150000;;;;NO;NO
 Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;;;;SI;SI
 Valparaiso;Cierre hacia enfermería (que impida el libre tránsito de pacientes);GASTO;1500000;;;;NO;NO
-Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha (PRIMERO SE ESPERA ARREGLAR PISO POR POST VENTA);GASTO;17000000;;;;NO;NO
+Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha (PRIMERO SE ESPERA ARREGLAR PISO POR POST VENTA);GASTO;17000000;;;;SI;SI
 Talca;Modificación de pendiente de la cubierta del estacionamiento de vehículos institucionales.;GASTO;5000000;;;;NO;NO
 Talca;Construcción de acceso con rampa al estacionamiento interior del edificio (nueva mampara). SE POSTERGA POR PRIORIDAD VP;GASTO;9000000;;;;NO;NO
 Talca;Nuevo toldo estructural en entrada principal (para dejar y retirar pacientes).;INVERSION;20000000;;;;SI;SI
