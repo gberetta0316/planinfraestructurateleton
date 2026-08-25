@@ -42,7 +42,7 @@ Talca;Nuevo toldo estructural en entrada principal (para dejar y retirar pacient
 Talca;Construcción de biblioteca en archivo de fichas clínicas.;INVERSION;15000000;;;;SI;SI
 Talca;Remodelación del área para la sala de descanso de TO.;GASTO;4000000;;;;SI;SI
 Talca;Mejoramiento y sellado de la pirámide vidriada y el pasillo central (enfermería);GASTO;2000000;;;;SI;SI
-Concepcion;Instalación de termos de agua caliente para optimizar el uso de las calderas;INVERSION;3000000;;;;SI;SI
+Concepcion;Instalación de termos de agua caliente para optimizar el uso de las calderas;INVERSION;3000000;2595866;;;SI;SI
 Concepcion;Mejorar infraestructura para prevenir el ingreso de palomas al interior del instituto;GASTO;7000000;;;;SI;SI
 Concepcion;Trabajos de reparacion restantes para eliminar zonas de goteras historicas;GASTO;5000000;3418561;;;SI;SI
 Concepcion;"Remodelar de box de traumatólogo, se necesita mas espacio para la atención de pacientes. (CANCELADO POR IT)";GASTO;4000000;;;;NO;NO
