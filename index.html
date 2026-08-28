@@ -194,8 +194,8 @@ h1{
 .map-node.selected .dot{fill:var(--accent);stroke:var(--accent);r:8;}
 .map-node .lbl{
   font-family:var(--font-mono);
-  font-size:10px;
-  fill:var(--ink-faint);
+  font-size:12px;
+  fill:var(--accent);
   transition:fill .15s;
 }
 .map-node:hover .lbl{fill:var(--accent-2);}
@@ -1521,8 +1521,8 @@ function renderInstitutes(){
     anyVisible = true;
 
     const montoTotal = allTasks.reduce((a,t)=>a+t.monto,0);
-    const instAgg = aggregateOverall(activeTasks);
-    const instPct = instAgg.pct;
+    const instCompleted = activeTasks.filter(t=>stateOf(t)==="done").length;
+    const instPct = allTasks.length>0 ? Math.round((instCompleted/allTasks.length)*100) : 0;
 
     const realTasks = activeTasks.filter(t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real)));
     const cotizTasks = activeTasks.filter(t=>t.cotizacion && !(t.real!=="" && t.real!==null && !isNaN(Number(t.real))));
