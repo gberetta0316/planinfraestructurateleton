@@ -69,7 +69,7 @@ Coyhaique;Cambio de iluminación fluorescente a Led;GASTO;600000;;;;SI;SI
 Iquique;Cambio de Grupo Electrógeno;INVERSION;15000000;;;;SI;SI
 Antofagasta;Implementación de sistema de climatización de presición y VEX-VIN para sala eléctrica -1;INVERSION;20000000;12581270;2026-09-08;2026-09-11;SI;SI
 Calama;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;SI;SI
-Copiapo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;NO;NO
+Copiapo;Compra de Termos acumuladores y sistema de bombeo para ACS. (Reemplaza: Suministro e instalación de planta solar térmica para aporte de ACS a piscinas. Queda para 2027);INVERSION;8000000;;;;SI;SI
 Coquimbo;Suministro e intalación de planta fotovoltaica;INVERSION;40000000;31800000;;;SI;SI
 Coquimbo;Suministro e instalación de planta solar térmica para aporte de ACS a piscinas;INVERSION;8000000;;;;SI;SI
 Santiago;Unificación de sistema de respaldo de agua del edificio B con edificio A;INVERSION;8000000;;;;NO;NO
