@@ -1,6 +1,6 @@
 ﻿Instituto;Detalle;Tipo;Presupuesto CLP;Real CLP;Inicio;Termino;Activo;Cotizacion
 Arica;Colocar Techo fuera de bodega general;GASTO;1725500;1725500;;;SI;SI
-Arica;Instalar cortina de aire en comedor;INVERSION;1368500;1452000;;;SI;SI
+Arica;Instalar cortina de aire en comedor;INVERSION;1368500;1452000;2026-09-01;2026-09-02;SI;SI
 Arica;Mejorar paredes perimetrales de cancha con evidente deterioro (IT DECIDE REALIZARLO);GASTO;2294320;327155;2026-07-26;2026-07-30;SI;SI
 Arica;Comprar arcos de baby futbol y Basquetbol para cancha;INVERSION;2500000;820000;2026-08-24;2026-08-24;SI;SI
 Iquique;Trabajo en techumbre (inclinacion y reparación);GASTO;5400000;;;;SI;SI
