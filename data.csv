@@ -30,10 +30,10 @@ Santiago;Galpón Lop Mejoramiento extracción sala de Laminado y Tabartería;GAS
 Santiago;Modificacion de oficinas y puestos de trabajo en Galpon LOP - PARTE 1 (piso superior);INVERSION;78000000;;;;SI;SI
 Valparaiso;Extractores en baños de personal (extractor centrifugo de simple aspiración);GASTO;3400000;;;;NO;NO
 Valparaiso;Mudador para pacientes;GASTO;4300000;;;;NO;NO
-Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;;2026-08-03;2026-08-18;SI;SI
+Valparaiso;Cambios de pisos en mal estado (tarket ml y palmetas);GASTO;1700000;1500000;2026-08-03;2026-08-18;SI;SI
 Valparaiso;Reparación y sellado de paredes interior IT (humedad);GASTO;1500000;;;;NO;NO
 Valparaiso;Pintura exterior escalera;GASTO;2150000;;;;NO;NO
-Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;;2026-08-12;2026-08-13;SI;SI
+Valparaiso;Cambios de quicio puerta interior/cambio puerta acceso;GASTO;2500000;1800000;2026-08-12;2026-08-13;SI;SI
 Valparaiso;Cierre hacia enfermería (que impida el libre tránsito de pacientes);GASTO;1500000;;;;NO;NO
 Rancagua;Demarcacion reglamentaria de espacios deportivos en multicancha (PRIMERO SE ESPERA ARREGLAR PISO POR POST VENTA);GASTO;17000000;;;;SI;SI
 Talca;Modificación de pendiente de la cubierta del estacionamiento de vehículos institucionales.;GASTO;5000000;;;;NO;NO
