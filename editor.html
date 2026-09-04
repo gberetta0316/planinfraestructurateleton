@@ -300,6 +300,22 @@ h1{
 .kpi-bar > div{height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));}
 .kpi-pie-row{display:flex;align-items:center;gap:12px;}
 .kpi-pie{flex:none;}
+.sync-warning{
+  display:none;
+  align-items:center;
+  gap:14px;
+  max-width:1280px;
+  margin:16px auto 0;
+  padding:12px 20px;
+  background:rgba(235,87,87,.1);
+  border:1px solid var(--danger);
+  border-radius:var(--radius);
+  color:var(--ink);
+  font-size:13px;
+  line-height:1.5;
+}
+.sync-warning b{color:var(--danger);}
+.sync-warning .btn{flex:none;}
 
 @media (max-width:900px){
   .kpis{grid-template-columns:repeat(2,1fr);}
@@ -934,6 +950,8 @@ footer.note{
   </div>
 </header>
 
+<div class="sync-warning" id="syncWarning"></div>
+
 <div class="overview">
   <div class="panel">
     <div class="panel-head">
@@ -1126,6 +1144,7 @@ function nextTaskId(){
   return TASKS.reduce((max,t)=>Math.max(max, Number(t.id)||0), 0) + 1;
 }
 
+const hadLocalTasks = !!localStorage.getItem(TASKS_KEY);
 let TASKS = loadTasks();
 saveTasks(); // persist the migrated/initial copy right away so it's the single source of truth
 let openStore = loadOpen();
@@ -2230,72 +2249,82 @@ function parseCSVLine(line, delim){
   return out;
 }
 
+// Parses a data.csv/planilla-format CSV (semicolon or comma delimited) into a TASKS-shaped
+// array. Shared by the file-import handler and the published-version sync check, so both
+// paths agree on column mapping, date normalization, and Activo/Cotizacion defaults.
+function parseTasksCSVText(text){
+  const clean = text.replace(/^\uFEFF/, "");
+  const lines = clean.split(/\r?\n/).filter(l=>l.trim().length>0);
+  if(lines.length<2) return null;
+  const delim = lines[0].includes(";") ? ";" : ",";
+  const header = parseCSVLine(lines[0], delim).map(h=>h.trim().toLowerCase());
+
+  const idx = {
+    instituto: header.findIndex(h=>h.includes("instituto")),
+    detalle: header.findIndex(h=>h.includes("detalle")),
+    tipo: header.findIndex(h=>h.includes("tipo")),
+    monto: header.findIndex(h=>h.includes("presupuesto")||h.includes("monto")),
+    real: header.findIndex(h=>h.includes("real")),
+    inicio: header.findIndex(h=>h.includes("inicio")),
+    fin: header.findIndex(h=>h.includes("term")||h.includes("fin")),
+    activo: header.findIndex(h=>h.includes("activo")),
+    cotizacion: header.findIndex(h=>h.includes("cotizacion")||h.includes("cotización"))
+  };
+  if(idx.instituto<0 || idx.detalle<0 || idx.monto<0) return null;
+
+  const validInstitutes = new Set(INSTITUTE_ORDER);
+  const tasks = [];
+  let skipped = 0;
+  let nextId = 1;
+  for(let i=1;i<lines.length;i++){
+    const cols = parseCSVLine(lines[i], delim);
+    const instituto = (cols[idx.instituto]||"").trim();
+    const detalle = (cols[idx.detalle]||"").trim();
+    if(!instituto || !detalle){ skipped++; continue; }
+    const matchedInst = validInstitutes.has(instituto) ? instituto :
+      INSTITUTE_ORDER.find(i2=>i2.toLowerCase()===instituto.toLowerCase()) ||
+      INSTITUTE_ORDER.find(i2=>(INSTITUTE_LABEL[i2]||i2).toLowerCase()===instituto.toLowerCase());
+    if(!matchedInst){ skipped++; continue; }
+    const tipoRaw = (idx.tipo>=0 ? (cols[idx.tipo]||"") : "GASTO").trim().toUpperCase();
+    const tipo = tipoRaw.startsWith("INV") ? "INVERSION" : "GASTO";
+    const monto = idx.monto>=0 ? (Number(String(cols[idx.monto]).replace(/[^0-9.-]/g,""))||0) : 0;
+    const real = idx.real>=0 ? (cols[idx.real]||"").trim() : "";
+    const inicio = idx.inicio>=0 ? normalizeDate((cols[idx.inicio]||"").trim()) : "";
+    const fin = idx.fin>=0 ? normalizeDate((cols[idx.fin]||"").trim()) : "";
+    const activoRaw = idx.activo>=0 ? (cols[idx.activo]||"").trim().toLowerCase() : "si";
+    const activo = !(activoRaw==="no" || activoRaw==="0" || activoRaw==="false");
+    const cotizacionRaw = idx.cotizacion>=0 ? (cols[idx.cotizacion]||"").trim().toLowerCase() : "no";
+    const cotizacion = (cotizacionRaw==="si" || cotizacionRaw==="1" || cotizacionRaw==="true");
+    tasks.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo, cotizacion });
+  }
+  return { tasks, skipped };
+}
+
 document.getElementById("importTasksInput").addEventListener("change", (e)=>{
   const file = e.target.files[0];
   if(!file) return;
   const reader = new FileReader();
   reader.onload = async (ev)=>{
     try{
-      const text = ev.target.result.replace(/^\uFEFF/, "");
-      const lines = text.split(/\r?\n/).filter(l=>l.trim().length>0);
-      if(lines.length<2){ await customAlert("El archivo no tiene filas de datos."); return; }
-      const delim = lines[0].includes(";") ? ";" : ",";
-      const header = parseCSVLine(lines[0], delim).map(h=>h.trim().toLowerCase());
-
-      const idx = {
-        instituto: header.findIndex(h=>h.includes("instituto")),
-        detalle: header.findIndex(h=>h.includes("detalle")),
-        tipo: header.findIndex(h=>h.includes("tipo")),
-        monto: header.findIndex(h=>h.includes("presupuesto")||h.includes("monto")),
-        real: header.findIndex(h=>h.includes("real")),
-        inicio: header.findIndex(h=>h.includes("inicio")),
-        fin: header.findIndex(h=>h.includes("term")||h.includes("fin")),
-        activo: header.findIndex(h=>h.includes("activo")),
-        cotizacion: header.findIndex(h=>h.includes("cotizacion")||h.includes("cotización"))
-      };
-      if(idx.instituto<0 || idx.detalle<0 || idx.monto<0){
+      const parsed = parseTasksCSVText(ev.target.result);
+      if(!parsed){
         await customAlert("El CSV debe tener al menos las columnas Instituto, Detalle y Presupuesto. Revisa el encabezado.");
         return;
       }
-
-      const validInstitutes = new Set(INSTITUTE_ORDER);
-      const imported = [];
-      let skipped = 0;
-      let nextId = 1;
-      for(let i=1;i<lines.length;i++){
-        const cols = parseCSVLine(lines[i], delim);
-        const instituto = (cols[idx.instituto]||"").trim();
-        const detalle = (cols[idx.detalle]||"").trim();
-        if(!instituto || !detalle){ skipped++; continue; }
-        const matchedInst = validInstitutes.has(instituto) ? instituto :
-          INSTITUTE_ORDER.find(i2=>i2.toLowerCase()===instituto.toLowerCase()) ||
-          INSTITUTE_ORDER.find(i2=>(INSTITUTE_LABEL[i2]||i2).toLowerCase()===instituto.toLowerCase());
-        if(!matchedInst){ skipped++; continue; }
-        const tipoRaw = (idx.tipo>=0 ? (cols[idx.tipo]||"") : "GASTO").trim().toUpperCase();
-        const tipo = tipoRaw.startsWith("INV") ? "INVERSION" : "GASTO";
-        const monto = idx.monto>=0 ? (Number(String(cols[idx.monto]).replace(/[^0-9.-]/g,""))||0) : 0;
-        const real = idx.real>=0 ? (cols[idx.real]||"").trim() : "";
-        const inicio = idx.inicio>=0 ? normalizeDate((cols[idx.inicio]||"").trim()) : "";
-        const fin = idx.fin>=0 ? normalizeDate((cols[idx.fin]||"").trim()) : "";
-        const activoRaw = idx.activo>=0 ? (cols[idx.activo]||"").trim().toLowerCase() : "si";
-        const activo = !(activoRaw==="no" || activoRaw==="0" || activoRaw==="false");
-        const cotizacionRaw = idx.cotizacion>=0 ? (cols[idx.cotizacion]||"").trim().toLowerCase() : "no";
-        const cotizacion = (cotizacionRaw==="si" || cotizacionRaw==="1" || cotizacionRaw==="true");
-        imported.push({ id: nextId++, instituto: matchedInst, detalle, tipo, monto, real, inicio, fin, activo, cotizacion });
-      }
-
+      const { tasks: imported, skipped } = parsed;
       if(imported.length===0){
         await customAlert("No se pudo importar ninguna fila válida. Revisa que los institutos coincidan con los 15 institutos del plan y que Detalle/Presupuesto estén completos.");
         return;
       }
 
-      const msg = `Se importaron ${imported.length} tareas` + (skipped>0 ? ` (se omitieron ${skipped} filas inválidas)` : "") + `.\n\nEsto REEMPLAZARÁ la planilla actual (${TASKS.length} tareas). ¿Continuar?`;
+      const msg = `Se importaron ${imported.length} tareas` + (skipped>0 ? ` (se omitieron ${skipped} filas inválidas)` : "") + `.` + "\n\n" + `Esto REEMPLAZARÁ la planilla actual (${TASKS.length} tareas). ¿Continuar?`;
       const ok = await customConfirm(msg, "Reemplazar");
       if(!ok) return;
 
       TASKS = imported;
       saveTasks();
       renderEditorTable();
+      hideSyncWarning();
     }catch(err){
       await customAlert("No se pudo leer el archivo CSV: " + escapeHtml(err.message));
     } finally {
@@ -2306,6 +2335,52 @@ document.getElementById("importTasksInput").addEventListener("change", (e)=>{
 });
 
 rerender();
+
+// ================= SINCRONIZACIÓN CON LO PUBLICADO =================
+// The editor's data lives only in this browser's localStorage. If it was cleared (or this
+// is a different device/browser than the one you usually publish from), editing here and
+// publishing would silently overwrite the published data.csv with stale/incomplete data —
+// this already happened once. So on load we compare against what's actually published:
+// if there was no local data at all, we adopt the published version instead of the old
+// hardcoded 74-task baseline; if local data exists but the task count differs, we warn
+// instead of guessing which one is right.
+function hideSyncWarning(){
+  const banner = document.getElementById("syncWarning");
+  if(banner) banner.style.display = "none";
+}
+function showSyncWarning(publishedCount){
+  const banner = document.getElementById("syncWarning");
+  if(!banner) return;
+  banner.innerHTML = "&#9888; Tu planilla local tiene <b>" + TASKS.length + "</b> tareas, pero la versión publicada tiene <b>" + publishedCount + "</b>. Pueden estar desincronizadas &mdash; antes de seguir editando, considera usar &quot;Editar planilla de tareas&quot; &rarr; &quot;Importar planilla (CSV)&quot; con la última versión publicada." +
+    ' <button class="btn ghost" id="dismissSyncWarning">Descartar</button>';
+  banner.style.display = "flex";
+  document.getElementById("dismissSyncWarning").addEventListener("click", hideSyncWarning);
+}
+async function checkPublishedSync(){
+  let res;
+  try{
+    res = await fetch("./data.csv?t=" + Date.now(), {cache:"no-store"});
+  }catch(e){ return; } // offline, or opened via file:// instead of a real host
+  if(!res || !res.ok) return;
+  const text = await res.text();
+  const parsed = parseTasksCSVText(text);
+  if(!parsed || parsed.tasks.length===0) return;
+  const published = parsed.tasks;
+
+  if(!hadLocalTasks){
+    TASKS = published;
+    saveTasks();
+    renderEditorTable();
+    rerender();
+    await customAlert("No se encontraron datos guardados en este navegador, así que se cargó automáticamente la última versión publicada (" + published.length + " tareas).");
+    return;
+  }
+
+  if(TASKS.length !== published.length){
+    showSyncWarning(published.length);
+  }
+}
+checkPublishedSync();
 </script>
 
 </body>
