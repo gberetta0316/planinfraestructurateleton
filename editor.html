@@ -568,6 +568,7 @@ input[type="number"]::-webkit-inner-spin-button{opacity:0.5;}
 .badge.gasto{color:var(--accent-2);border-color:var(--accent-2);}
 .badge.inversion{color:var(--accent);border-color:var(--accent);}
 .badge.cotizacion{color:#F2C94C;border-color:#F2C94C;}
+.badge.done{color:var(--state-done);border-color:var(--state-done);}
 .monto{
   font-family:var(--font-mono);
   font-size:12px;
@@ -1724,7 +1725,8 @@ function renderTaskRow(t, axis){
     <div class="detalle">${t.detalle}</div>
     <div class="meta-row">
       <span class="badge ${t.tipo==='GASTO'?'gasto':'inversion'}">${t.tipo}</span>
-      ${t.cotizacion ? '<span class="badge cotizacion">En cotización</span>' : ""}
+      ${(t.cotizacion && state!=="done") ? '<span class="badge cotizacion">En cotización</span>' : ""}
+      ${state==="done" ? '<span class="badge done">✓ Completada</span>' : ""}
       <span class="monto">Presupuesto ${clp(t.monto)}</span>
       ${hasReal ? `<span class="monto">· Real ${clp(Number(t.real))}</span>` : ""}
       ${varianceHtml}
