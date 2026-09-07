@@ -57,7 +57,7 @@ Valdivia;Cielo americano oficina JGSV y sala de familia;GASTO;2000000;;;;SI;SI
 Valdivia;Compra e instalacion Ac para sala nuevas tecnologías de 18000 BTU;INVERSION;1200000;;;;SI;SI
 Temuco;Modificación de circuito de agua potable para sectorizar y evitar corte total;GASTO;5000000;;;;SI;SI
 Temuco;"Mejora de mobiliario antiguo y en mal estado, distintos sectores";GASTO;10000000;;;;SI;SI
-Temuco;"Reparación de techumbre de Intituto, deteriorado y con filtraciones en varios puntos (LOP, pasillo, etc)";GASTO;40000000;;;;SI;SI
+Temuco;"Reparación de techumbre de Intituto, deteriorado y con filtraciones en varios puntos (LOP, pasillo, etc)";GASTO;40000000;17000000;;;SI;SI
 Temuco;Cambio de sistema de calefaccion para duchas (sistema de agua caliente).;GASTO;8000000;3798000;;;SI;SI
 Puerto Montt;"Sala de bienestar para colaboradores (NO VA, SE OCUPARÁ ACTUAL SALA DE PADRES)";GASTO;10000000;;;;NO;NO
 Puerto Montt;Ampliacion sala para padres;INVERSION;10000000;;;;SI;NO
