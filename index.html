@@ -1442,10 +1442,10 @@ function renderKPIs(){
     cotizPieSvg = `<path d="${wedgeResto}" fill="var(--bg-panel-2)" stroke="var(--bg-panel)" stroke-width="1"/><path d="${wedgeCotiz}" fill="#F2C94C" stroke="var(--bg-panel)" stroke-width="1"/>`;
   }
 
-  const sinProgramar = activeTasks.filter(t=>stateOf(t)==="sin").length;
-  const porIniciar = activeTasks.filter(t=>stateOf(t)==="upcoming").length;
-  const enCurso = activeTasks.filter(t=>stateOf(t)==="progress").length;
-  const completadas = activeTasks.filter(t=>stateOf(t)==="done").length;
+  const sinProgramar = TASKS.filter(t=>stateOf(t)==="sin").length;
+  const porIniciar = TASKS.filter(t=>stateOf(t)==="upcoming").length;
+  const enCurso = TASKS.filter(t=>stateOf(t)==="progress").length;
+  const completadas = TASKS.filter(t=>stateOf(t)==="done").length;
 
   const hasReal = t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real));
   const planGastoTotal = TASKS.filter(t=>t.tipo==="GASTO").reduce((a,t)=>a+t.monto,0);
@@ -1485,7 +1485,7 @@ function renderKPIs(){
         <div class="state-summary-item"><span class="state-dot" style="background:var(--state-progress)"></span><b>${enCurso}</b> En ejecución</div>
         <div class="state-summary-item"><span class="state-dot" style="background:var(--state-done)"></span><b>${completadas}</b> Completadas</div>
       </div>
-      <div class="sub">de ${total} tareas totales · nivel nacional</div>
+      <div class="sub">de ${TASKS.length} tareas totales · nivel nacional</div>
     </div>
     <div class="kpi">
       <div class="label">Gasto: presupuestado vs. real completado</div>
