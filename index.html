@@ -311,6 +311,10 @@ h1{
 .kpi-bar > div{height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));}
 .kpi-pie-row{display:flex;align-items:center;gap:12px;}
 .kpi-pie{flex:none;}
+.state-summary{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;margin-top:6px;}
+.state-summary-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-dim);white-space:nowrap;}
+.state-summary-item b{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ink);margin-right:1px;}
+.state-summary-item .state-dot{flex:none;}
 
 @media (max-width:900px){
   .kpis{grid-template-columns:repeat(2,1fr);}
@@ -887,7 +891,7 @@ footer.note{
 
 <header class="top">
   <div class="header-text">
-    <h1>Plan de Infraestructura Institutos</h1>
+    <h1>Plan Infraestructura Institutos 2026</h1>
     <p class="subtitle">Seguimiento de avance de obras y mejoras en los 15 institutos a lo largo del país.</p>
   </div>
   <div class="brand-logo">
@@ -1438,8 +1442,10 @@ function renderKPIs(){
     cotizPieSvg = `<path d="${wedgeResto}" fill="var(--bg-panel-2)" stroke="var(--bg-panel)" stroke-width="1"/><path d="${wedgeCotiz}" fill="#F2C94C" stroke="var(--bg-panel)" stroke-width="1"/>`;
   }
 
-  const completadas = activeTasks.filter(t=>stateOf(t)==="done").length;
+  const sinProgramar = activeTasks.filter(t=>stateOf(t)==="sin").length;
+  const porIniciar = activeTasks.filter(t=>stateOf(t)==="upcoming").length;
   const enCurso = activeTasks.filter(t=>stateOf(t)==="progress").length;
+  const completadas = activeTasks.filter(t=>stateOf(t)==="done").length;
 
   const hasReal = t=>t.real!=="" && t.real!==null && !isNaN(Number(t.real));
   const planGastoTotal = TASKS.filter(t=>t.tipo==="GASTO").reduce((a,t)=>a+t.monto,0);
@@ -1472,9 +1478,14 @@ function renderKPIs(){
       <div class="sub">${cotizCount} de ${TASKS.length} tareas en cotización</div>
     </div>
     <div class="kpi">
-      <div class="label">En ejecución / completadas</div>
-      <div class="value">${enCurso}<small> / ${completadas}</small></div>
-      <div class="sub">de ${total} tareas totales</div>
+      <div class="label">Tareas por estado</div>
+      <div class="state-summary">
+        <div class="state-summary-item"><span class="state-dot" style="background:var(--state-pending)"></span><b>${sinProgramar}</b> Sin programar</div>
+        <div class="state-summary-item"><span class="state-dot" style="background:var(--state-upcoming)"></span><b>${porIniciar}</b> Por iniciar</div>
+        <div class="state-summary-item"><span class="state-dot" style="background:var(--state-progress)"></span><b>${enCurso}</b> En ejecución</div>
+        <div class="state-summary-item"><span class="state-dot" style="background:var(--state-done)"></span><b>${completadas}</b> Completadas</div>
+      </div>
+      <div class="sub">de ${total} tareas totales · nivel nacional</div>
     </div>
     <div class="kpi">
       <div class="label">Gasto: presupuestado vs. real completado</div>
